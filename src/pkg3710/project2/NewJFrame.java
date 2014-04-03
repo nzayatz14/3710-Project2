@@ -59,6 +59,8 @@ public class NewJFrame extends javax.swing.JFrame {
         Ball3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnuLoad = new javax.swing.JMenuItem();
+        mnuSave = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -107,6 +109,22 @@ public class NewJFrame extends javax.swing.JFrame {
         Ball3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
 
         jMenu1.setText("File");
+
+        mnuLoad.setText("Load");
+        mnuLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuLoadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuLoad);
+
+        mnuSave.setText("Save");
+        mnuSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSaveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuSave);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.META_MASK));
         jMenuItem1.setText("Exit");
@@ -297,6 +315,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtAmountActionPerformed
 
+    private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLoadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuLoadActionPerformed
+
+    private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuSaveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +383,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem mnuLoad;
+    private javax.swing.JMenuItem mnuSave;
     private javax.swing.JTextField txtAmount;
     // End of variables declaration//GEN-END:variables
 }
