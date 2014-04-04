@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pkg3710.project2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 /**
  *
@@ -131,18 +132,24 @@ public class CreateNewUser extends javax.swing.JFrame {
         char[] pass = txtPassword.getPassword();
         char[] pass2 = txtReenterPassword.getPassword();
 
-        while (pass != pass2) {
-        //display error & try again
-        }
-        
         //add player's info to a text file
-        bw = new BufferedWriter(new FileWriter(txtUsername,true));  
-        bw.write(txtUsername);  
-        bw.write("\n");  
-        bw.write(txtPassword);  
-        bw.write("\n");  
-        bw.close(); 
-        
+        if (pass.equals(pass2)) {
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(username + ".txt", true));
+                bw.write(username);
+                bw.write("\n");
+                bw.write(pass);
+                bw.write("\n");
+                bw.close();
+            } catch (Exception ex) {
+
+            }
+
+            this.setVisible(false);
+            this.dispose();
+        } else {
+
+        }
         //go to the game screen 
     }//GEN-LAST:event_buttonEnterActionPerformed
 

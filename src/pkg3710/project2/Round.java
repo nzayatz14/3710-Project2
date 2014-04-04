@@ -10,8 +10,4 @@ package pkg3710.project2;
  * @author nzayatz14
  */
 public class Round {
-
-    public static void swapGraphics(int a, int b) {
-
-    }
 }

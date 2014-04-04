@@ -19,7 +19,7 @@ public class Game {
     int level;
     final int SWAPS = 5;
     double money;
-    Cup cups[]=new Cup[3];
+    Cup cups[]={new Cup(0,false,1), new Cup(1,false,2),new Cup(2,false,3)};
     
     public Game()
     {
@@ -83,16 +83,24 @@ public class Game {
         {
             int a = R.nextInt(3);
             int b = a;
-            Cup c;
             while(b==a)
             {  
                 b = R.nextInt(3);
             }
 
-            c = cups[b];
-            cups[b] = cups[a];
-            cups[a]=c;
-            Round.swapGraphics(a,b);
+            Cup c = new Cup(cups[b]);
+            cups[b].copyCup(cups[a]);
+            cups[a].copyCup(c);
+            cups[a].setPosition(a);
+            cups[b].setPosition(b);
+            
+            if(b<a){
+                NewJFrame.swapGraphics(cups[b],cups[a]);
+            }else{
+                NewJFrame.swapGraphics(cups[a],cups[b]);
+            }
+            
+            
         }
     }
 }

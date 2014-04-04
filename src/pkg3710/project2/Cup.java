@@ -13,19 +13,23 @@ package pkg3710.project2;
 public class Cup {
     int position;
     boolean hasBall;
+    int number;
     public Cup(){
         position = 0;
         hasBall = false;
+        number = 0;
     }
     
     public Cup(int p){
         position = p;
         hasBall = false;
+        number = 0;
     }
     
-    public Cup(int p, boolean h){
+    public Cup(int p, boolean h, int n){
         position = p;
         hasBall = h;
+        number = n;
     }
     
     public Cup(Cup c){
@@ -51,5 +55,14 @@ public class Cup {
     public void copyCup(Cup c){
         position = c.getPosition();
         hasBall = c.containsBall();
+        number = c.getNumber();
+    }
+    
+    public int getNumber(){
+        return number;
+    }
+    
+    public void setNumber(int n){
+        number = n;
     }
 }
