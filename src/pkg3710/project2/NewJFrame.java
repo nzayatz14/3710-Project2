@@ -16,7 +16,6 @@ import java.util.TimerTask;
  * @author nzayatz14
  */
 public class NewJFrame extends javax.swing.JFrame {
-
     Game game = new Game();
     //private JFrameSupport support = new JFrameSupport();
     /**
@@ -68,10 +67,13 @@ public class NewJFrame extends javax.swing.JFrame {
         setTitle("Cup Game Bruh");
 
         Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup1.setText("1");
 
         Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup2.setText("2");
 
         Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup3.setText("3");
 
         jButton1.setText("Go!");
         jButton1.setToolTipText("");
@@ -160,7 +162,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .add(Cup2)
                 .add(18, 18, 18)
                 .add(Cup3)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .add(131, 131, 131)
                 .add(Ball1)
@@ -232,7 +234,10 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        game.runRound();
+        jButton1.setEnabled(false);
+        int swaps[] = game.runRound();
+        swapGraphics(swaps,0);
+        jButton1.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
@@ -247,14 +252,14 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuSaveActionPerformed
 
-    public void swap1and2(int cupNumber1, int cupNumber2){
+    public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
         final int Cup3X = Cup3.getX();
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
-        
+
         time.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -305,15 +310,15 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }, 0, 1);
     }
-    
-    public void swap1and3(int cupNumber1, int cupNumber2){
+
+    public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
         final int Cup3X = Cup3.getX();
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
-        
+
         time.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -364,15 +369,15 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }, 0, 1);
     }
-    
-    public void swap2and3(int cupNumber1, int cupNumber2){
+
+    public void swap2and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
         final int Cup3X = Cup3.getX();
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
-        
+
         time.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -423,16 +428,28 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }, 0, 1);
     }
-    
-    public void swapGraphics(Cup a, Cup b) {
-        if(a.getPosition() == 1 && b.getPosition() == 2){
-            swap1and2(a.getNumber(), b.getNumber());
-        }else if (a.getPosition() == 1 && b.getPosition() == 3){
-            swap1and3(a.getNumber(), b.getNumber()); 
-        }else{
-            swap2and3(a.getNumber(), b.getNumber());
+
+    public void swapGraphics(int sw[], int s) {
+        if(sw.length>s){
+            int temp = sw[s];
+            int cupNum1 = temp / 1000;
+            temp = temp % 1000;
+            int a = temp / 100;
+            temp = temp % 100;
+            int cupNum2 = temp / 10;
+            temp = temp % 10;
+            int b = temp;
+            System.out.println(cupNum1 + " " + a + " " + cupNum2 + " " + b);
+            if (a == 0 && b == 1) {
+                swap1and2(cupNum1, cupNum2, sw, s);
+            } else if (a == 0 && b == 2) {
+                swap1and3(cupNum1, cupNum2, sw, s);
+            } else {
+                swap2and3(cupNum1, cupNum2, sw, s);
+            }
         }
-    } 
+    }
+
     /**
      * @param args the command line arguments
      */
