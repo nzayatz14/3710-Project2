@@ -76,8 +76,10 @@ public class Game {
     {
         money=cash;
     }
-    public void runRound()
+    public int[] runRound(int place)
     {
+        cups[place].setContains(true);
+        int swap[] = new int[SWAPS];
         Random R = new Random();
         for (int i = 0;i<SWAPS;i++)
         {
@@ -88,19 +90,24 @@ public class Game {
                 b = R.nextInt(3);
             }
 
+            if(b<a){
+                int temp = b;
+                b = a;
+                a = temp;
+            }
+            
             Cup c = new Cup(cups[b]);
             cups[b].copyCup(cups[a]);
             cups[a].copyCup(c);
             cups[a].setPosition(a);
             cups[b].setPosition(b);
             
-            if(b<a){
-                NewJFrame.swapGraphics(cups[b],cups[a]);
-            }else{
-                NewJFrame.swapGraphics(cups[a],cups[b]);
-            }
+            int swapCall = (cups[a].getNumber()*1000)+(a*100)+(cups[b].getNumber()*10)+b;
+            swap[i] = swapCall;
             
-            
+            //System.out.println(a + " " + b+" "+swapCall + cups[0].getNumber() + " " +cups[1].getNumber() + " " +cups[2].getNumber());
         }
+        
+        return swap;
     }
 }

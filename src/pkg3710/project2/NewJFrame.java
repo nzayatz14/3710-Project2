@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
 
 /**
  *
@@ -25,8 +26,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         initComponents();
         this.getContentPane().setBackground(Color.white);
-        Ball2.setVisible(false);
-        Ball3.setVisible(false);
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
         btnCup3.setEnabled(false);
@@ -54,8 +53,6 @@ public class NewJFrame extends javax.swing.JFrame {
         WinPercentage = new javax.swing.JLabel();
         MoneyLeft = new javax.swing.JLabel();
         Ball1 = new javax.swing.JLabel();
-        Ball2 = new javax.swing.JLabel();
-        Ball3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuLoad = new javax.swing.JMenuItem();
@@ -91,10 +88,25 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         btnCup1.setText("Cup 1");
+        btnCup1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCup1ActionPerformed(evt);
+            }
+        });
 
         btnCup3.setText("Cup 3");
+        btnCup3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCup3ActionPerformed(evt);
+            }
+        });
 
         btnCup2.setText("Cup 2");
+        btnCup2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCup2ActionPerformed(evt);
+            }
+        });
 
         PlaceBet.setText("Place Bet:");
 
@@ -105,10 +117,6 @@ public class NewJFrame extends javax.swing.JFrame {
         MoneyLeft.setText("Money Left:");
 
         Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
-
-        Ball2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
-
-        Ball3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
 
         jMenu1.setText("File");
 
@@ -166,9 +174,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .add(131, 131, 131)
                 .add(Ball1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(Ball3)
-                .add(119, 119, 119))
+                .add(119, 586, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .add(115, 115, 115)
                 .add(btnCup1)
@@ -179,18 +185,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 .add(103, 103, 103))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(Ball2)
-                        .add(350, 350, 350))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .add(PlaceBet)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(331, 331, 331))))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(layout.createSequentialGroup()
+                        .add(PlaceBet)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(331, 331, 331))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -206,11 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .add(btnCup3)
                     .add(btnCup2))
                 .add(29, 29, 29)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(Ball1)
-                        .add(Ball2))
-                    .add(Ball3))
+                .add(Ball1)
                 .add(46, 46, 46)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(PlaceBet, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -235,9 +232,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jButton1.setEnabled(false);
-        int swaps[] = game.runRound();
-        swapGraphics(swaps,0);
-        jButton1.setEnabled(true);
+        Ball1.setVisible(true);
+        Random r = new Random();
+        placeAndMoveBallUp();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
@@ -252,6 +249,27 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuSaveActionPerformed
 
+    private void btnCup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCup1ActionPerformed
+        btnCup1.setEnabled(false);
+        btnCup2.setEnabled(false);
+        btnCup3.setEnabled(false);
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_btnCup1ActionPerformed
+
+    private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCup2ActionPerformed
+        btnCup1.setEnabled(false);
+        btnCup2.setEnabled(false);
+        btnCup3.setEnabled(false);
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_btnCup2ActionPerformed
+
+    private void btnCup3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCup3ActionPerformed
+        btnCup1.setEnabled(false);
+        btnCup2.setEnabled(false);
+        btnCup3.setEnabled(false);
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_btnCup3ActionPerformed
+
     public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -259,56 +277,65 @@ public class NewJFrame extends javax.swing.JFrame {
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
+        final int swa[] = sw;
+        final int d = s;
 
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() < Cup2X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+                    if (Cup1.getX() > Cup2X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() < Cup3X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+                    if (Cup1.getX() > Cup3X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() < Cup3X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+                    if (Cup2.getX() > Cup3X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() < Cup1X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+                    if (Cup2.getX() > Cup1X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() < Cup1X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+                    if (Cup3.getX() > Cup1X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() < Cup2X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+                    if (Cup3.getX() > Cup2X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 }
 
             }
         }, 0, 1);
+        
     }
 
     public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
@@ -318,50 +345,58 @@ public class NewJFrame extends javax.swing.JFrame {
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
+        final int swa[] = sw;
+        final int d = s;
 
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() < Cup2X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+                    if (Cup1.getX() > Cup2X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() < Cup3X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+                    if (Cup1.getX() > Cup3X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() < Cup3X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+                    if (Cup2.getX() > Cup3X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() < Cup1X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+                    if (Cup2.getX() > Cup1X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() < Cup1X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+                    if (Cup3.getX() > Cup1X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() < Cup2X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+                    if (Cup3.getX() > Cup2X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 }
@@ -377,50 +412,58 @@ public class NewJFrame extends javax.swing.JFrame {
         final int Cup2X = Cup2.getX();
         final int cupNum1 = cupNumber1;
         final int cupNum2 = cupNumber2;
+        final int swa[] = sw;
+        final int d = s;
 
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() < Cup2X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+                    if (Cup1.getX() > Cup2X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() < Cup3X) {
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+                    if (Cup1.getX() > Cup3X) {
+                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() < Cup3X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+                    if (Cup2.getX() > Cup3X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() < Cup1X) {
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+                    if (Cup2.getX() > Cup1X) {
+                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() < Cup1X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+                    if (Cup3.getX() > Cup1X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() < Cup2X) {
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+                    if (Cup3.getX() > Cup2X) {
+                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
                     } else {
+                        swapGraphics(swa,d+1);
                         this.cancel();
                     }
                 }
@@ -439,7 +482,7 @@ public class NewJFrame extends javax.swing.JFrame {
             int cupNum2 = temp / 10;
             temp = temp % 10;
             int b = temp;
-            System.out.println(cupNum1 + " " + a + " " + cupNum2 + " " + b);
+            //System.out.println(cupNum1 + " " + a + " " + cupNum2 + " " + b);
             if (a == 0 && b == 1) {
                 swap1and2(cupNum1, cupNum2, sw, s);
             } else if (a == 0 && b == 2) {
@@ -447,9 +490,43 @@ public class NewJFrame extends javax.swing.JFrame {
             } else {
                 swap2and3(cupNum1, cupNum2, sw, s);
             }
+        }else{
+            btnCup1.setEnabled(true);
+            btnCup2.setEnabled(true);
+            btnCup3.setEnabled(true);
         }
     }
 
+    private void placeAndMoveBallUp(){
+        Random r = new Random();
+        final int place = r.nextInt(3);
+        final int x;
+        if(place == 0)
+                x = btnCup1.getX();
+        else if (place == 1)
+                x = btnCup2.getX();
+        else
+                x = btnCup3.getX();;
+        
+        Ball1.setLocation(x,btnCup1.getY()+20);
+        Timer time = new Timer();
+        
+        System.out.println(place + " " + Ball1.getLocation());
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(Ball1.getY()>(Cup1.getY()-Ball1.getHeight()+Cup1.getHeight())){
+                    Ball1.setLocation(x, Ball1.getY()-1);
+                   // System.out.println(Ball1.getLocation());
+                }else{
+                    Ball1.setVisible(false);
+                    int swaps[] = game.runRound(place);
+                    swapGraphics(swaps,0);
+                    this.cancel(); 
+                }
+            }
+        }, 2000, 4);
+    }
     /**
      * @param args the command line arguments
      */
@@ -493,8 +570,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Ball1;
-    private javax.swing.JLabel Ball2;
-    private javax.swing.JLabel Ball3;
     private javax.swing.JLabel Cup1;
     private javax.swing.JLabel Cup2;
     private javax.swing.JLabel Cup3;
