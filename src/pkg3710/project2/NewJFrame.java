@@ -40,6 +40,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Ball1 = new javax.swing.JLabel();
         Cup1 = new javax.swing.JLabel();
         Cup2 = new javax.swing.JLabel();
         Cup3 = new javax.swing.JLabel();
@@ -52,7 +53,6 @@ public class NewJFrame extends javax.swing.JFrame {
         Level = new javax.swing.JLabel();
         WinPercentage = new javax.swing.JLabel();
         MoneyLeft = new javax.swing.JLabel();
-        Ball1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuLoad = new javax.swing.JMenuItem();
@@ -62,6 +62,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cup Game Bruh");
+
+        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
 
         Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
         Cup1.setText("1");
@@ -116,8 +118,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         MoneyLeft.setText("Money Left:");
 
-        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
-
         jMenu1.setText("File");
 
         mnuLoad.setText("Load");
@@ -157,61 +157,63 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(40, 40, 40)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(Cup1)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                        .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(124, 124, 124)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(WinPercentage)
                             .add(Level)
-                            .add(MoneyLeft))))
+                            .add(MoneyLeft)))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(106, 106, 106)
+                        .add(Cup1)))
                 .add(18, 18, 18)
                 .add(Cup2)
                 .add(18, 18, 18)
                 .add(Cup3)
-                .addContainerGap(16, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(131, 131, 131)
-                .add(Ball1)
-                .add(119, 586, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(115, 115, 115)
-                .add(btnCup1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(btnCup2)
-                .add(152, 152, 152)
-                .add(btnCup3)
-                .add(103, 103, 103))
+                .addContainerGap(100, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(layout.createSequentialGroup()
-                        .add(PlaceBet)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(331, 331, 331))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(Ball1)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                            .add(btnCup1)
+                            .add(154, 154, 154)
+                            .add(btnCup2)
+                            .add(173, 173, 173)
+                            .add(btnCup3)
+                            .add(157, 157, 157))
+                        .add(layout.createSequentialGroup()
+                            .add(243, 243, 243)
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(layout.createSequentialGroup()
+                                    .add(PlaceBet)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(357, 357, 357)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(43, 43, 43)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(Cup3)
-                    .add(Cup2)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(Cup2)
+                        .add(Cup3))
                     .add(Cup1))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(btnCup1)
-                    .add(btnCup3)
-                    .add(btnCup2))
-                .add(29, 29, 29)
-                .add(Ball1)
-                .add(46, 46, 46)
+                .add(32, 32, 32)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(PlaceBet, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(btnCup1)
+                    .add(btnCup2)
+                    .add(btnCup3))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(Ball1)
+                .add(49, 49, 49)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(PlaceBet, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton1)
                 .add(25, 25, 25)
@@ -234,7 +236,22 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         Ball1.setVisible(true);
         Random r = new Random();
-        placeAndMoveBallUp();
+        final int place = r.nextInt(3);
+        //int swaps[] = game.runRound(place);
+        
+        final int x;
+        if(place == 0)
+                x = btnCup1.getX();
+        else if (place == 1)
+                x = btnCup2.getX();
+        else
+                x = btnCup3.getX();;
+        
+        Ball1.setLocation(x,btnCup1.getY()+20);
+        
+        int swaps[] = game.runRound(place);
+        swapGraphics(swaps,0);
+                
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed

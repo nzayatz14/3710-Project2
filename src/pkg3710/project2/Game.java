@@ -78,6 +78,9 @@ public class Game {
     }
     public int[] runRound(int place)
     {
+        for(int i = 0;i<cups.length;i++)
+            cups[i].setContains(false);
+        
         cups[place].setContains(true);
         int swap[] = new int[SWAPS];
         Random R = new Random();
