@@ -248,7 +248,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 x = btnCup3.getX();;
         
         Ball1.setLocation(x,btnCup1.getY()+20);
-        
+        System.out.println(Cup1.getLocation());
+        System.out.println(Cup2.getLocation());
+        System.out.println(Cup3.getLocation());
         int swaps[] = game.runRound(place);
         swapGraphics(swaps,0);
                 
