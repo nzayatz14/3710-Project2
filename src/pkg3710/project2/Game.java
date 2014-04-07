@@ -76,6 +76,14 @@ public class Game {
     {
         money=cash;
     }
+    
+    public double calculateWinPercentage(){
+        int correct1 = getCorrect();
+        int guesses1 = getGuesses();
+        double winPercentage = correct1 / guesses1;
+        return winPercentage;
+    }
+    
     public int[] runRound(int place)
     {
         cups[place].setContains(true);
