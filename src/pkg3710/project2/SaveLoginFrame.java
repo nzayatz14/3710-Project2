@@ -137,7 +137,7 @@ public class SaveLoginFrame extends javax.swing.JFrame {
     }                                           
 
     /*
-    This fucniton will read in a username and password
+    This fuction will read in a username and passowrd, verify both, and save a game to a user's file if it exists. User will enter thier username and password. The funciton will read in both and verify that the username is valid by chekcing with a list of all usernames taht havce been created. If username is not valid, an error will be displayed. If valid, the funciton will open their file "username".txt and verify that the password is correct. If not correct, an error will be displayed and the apssword field will be cleared for them ot reenter in taht password. If correct, the function will save their game info to thier accoutn (accoutn balance, correct guesses, total guesses, last level palyed). If the user click's "create new username" they will be directed to hte CreateNewUserFrame to create a new usernaem and password. 
     */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here: 
