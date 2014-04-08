@@ -78,6 +78,7 @@ public class Game {
         money=cash;
     }
     
+    //calculate the win percentage
     public double calculateWinPercentage(){
         int correct1 = getCorrect();
         int guesses1 = getGuesses();
@@ -85,10 +86,18 @@ public class Game {
         return winPercentage;
     }
     
+    //In: the position of which the ball will be hiding under
+    //Out: an array of swaps in the format "abcd"
+    //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
     public int[] runRound(int place)
     {
+        //set the cup at place to contain the ball
         cups[place].setContains(true);
+        
+        
         int swap[] = new int[SWAPS];
+        
+        //generate random numbers to be swapped, making sure they are different
         Random R = new Random();
         for (int i = 0;i<SWAPS;i++)
         {
@@ -99,18 +108,21 @@ public class Game {
                 b = R.nextInt(3);
             }
 
+            //swap the numbers of necessary so 'b' is the larger number
             if(b<a){
                 int temp = b;
                 b = a;
                 a = temp;
             }
             
+            //swap the cup objects int the array
             Cup c = new Cup(cups[b]);
             cups[b].copyCup(cups[a]);
             cups[a].copyCup(c);
             cups[a].setPosition(a);
             cups[b].setPosition(b);
             
+            //calcuate the integer needed to represent the swap in the array then add it to the array
             int swapCall = (cups[a].getNumber()*1000)+(a*100)+(cups[b].getNumber()*10)+b;
             swap[i] = swapCall;
             
