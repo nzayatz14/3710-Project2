@@ -114,16 +114,19 @@ public class LoadLoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents                        
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here
     }                                           
 
     @SuppressWarnings("empty-statement")
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here
     }                                           
 
+    /*
+    This fuction will read in a username and passowrd, verify both, and load a game to a previously played state. User will enter thier username and password. The funciton will read in both and verify that the username is valid by chekcing with a list of all usernames taht havce been created. If not valid, an error will be displayed. If valid, the funciton will open their file "username".txt and verify that the password is correct. If not correct, an error will be displayed and the apssword field will be cleared for them ot reenter in taht password. If correct, the function will search their file and load their previosuly saved info (accoutn balance, correct guesses, total guesses, last level palyed). This info will be passed to NewJFrame to contineu the game. 
+    */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here: 
+        // read in username and password 
         String username = txtUsername.getText();
         char[] pass = txtPassword.getPassword();
         Component ErrorFrame = null;
