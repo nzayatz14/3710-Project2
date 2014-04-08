@@ -17,6 +17,7 @@ public class Game {
     int correct;
     int guesses;
     int level;
+    Player p = new Player();
     final int SWAPS = 5;
     double money;
     Cup cups[]={new Cup(0,false,1), new Cup(1,false,2),new Cup(2,false,3)};
@@ -76,11 +77,16 @@ public class Game {
     {
         money=cash;
     }
+    
+    public double calculateWinPercentage(){
+        int correct1 = getCorrect();
+        int guesses1 = getGuesses();
+        double winPercentage = correct1 / guesses1;
+        return winPercentage;
+    }
+    
     public int[] runRound(int place)
     {
-        for(int i = 0;i<cups.length;i++)
-            cups[i].setContains(false);
-        
         cups[place].setContains(true);
         int swap[] = new int[SWAPS];
         Random R = new Random();

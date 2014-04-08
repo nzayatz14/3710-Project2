@@ -6,6 +6,7 @@
 
 package pkg3710.project2;
 
+import java.awt.Component;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,73 +14,73 @@ import javax.swing.JOptionPane;
  * @author micheleburns
  */
 public class Player {
-    public class Bankaccount {
-        private String Username;
-        private int balance;
 
-        public Bankaccount()
-        {
-            balance = 100;
-        }
-
-        public int balance(){
-            return balance;
-        }
-
-        public void showBalance(String balance){
-        }
-
-        public void showName(String name){
-        }
-
-        public int withdraw(int wager1) {
-            return balance - wager1;   
-        }
-        
-        public int deposit(int win1){
-            return balance += win1;
-        }
-    }
-
-    double AccountBalance;
+    private String Username;
+    private int balance;
     int WinPercentage;
     String userName;
     int level;
     double wager;
-    
-
+    double holdwager;
     
     public Player()
     {
-        level = 0;
-        AccountBalance = 0;
+        level = 1;
+        balance = 100;
     }
     
+    public int balance(){
+        return balance;
+    }
+
+    public void showBalance(String balance){
+    }
+
+    public void showName(String name){
+    }
+
+    public int withdraw(int wager1) {
+        return balance - wager1;   
+    }
+        
+    public int deposit(int win1){
+        return balance += win1;
+    }
+
     public int getLevel()
     {
         // the current level the Player is on.
         return level;
     }
     
-    public double getAccountBalance()
-    {
-        //returns the current Balance of the Player's "Bank"
-        return AccountBalance;
+    public double getWinPercentage(){
+        double winPercentage = 0; //Game.calculateWinPercentage();
+        return winPercentage;
     }
     
-    public double PlaceBet()
+    public double getBalance()
+    {
+        //returns the current Balance of the Player's "Bank"
+        return balance;
+    }
+    
+    public double PlaceBet(double wager)
     {   
-     // needs more content, just haven't gotten there
+        holdwager = wager; 
+        
         return 0;
     }
-    public double CheckWager()
+    
+    public Boolean CheckWager(double money)
     {
-        if(wager > AccountBalance){
-          JOptionPane.showMessageDialog(null, "You do not have enough funds to place that bet"); 
+        Component ErrorFrame = null;
+        if(money > balance){
+          JOptionPane.showMessageDialog(ErrorFrame, "You do not have enough funds to place that bet.", "Error", JOptionPane.ERROR_MESSAGE);
+          return false;
         }else{
-          PlaceBet();  
-        }
-        return 0;
-        
+          JOptionPane.showMessageDialog(null, "You have sufficient funds to place that bet."); 
+          PlaceBet(money);
+          return true;
+        }    
     }        
 }
