@@ -126,9 +126,12 @@ public class CreateNewUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents                        
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here, do not perform anything when text is entered
     }                                           
 
+    /*
+    Once the submit button is clicked, this function will read in the username and two passwords. It will first verify that the two passwords match and if match this fucntion will write the username and password to a file titled "username".txt that will be stored for later use. If the passowrds don't match, an error will be displayed, the password fields will be cleared, and the user can reenter in thier passwords. 
+    */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
         BufferedWriter bw = null;
         Component ErrorFrame = null;
@@ -194,7 +197,7 @@ public class CreateNewUser extends javax.swing.JFrame {
     }                                           
 
     private void txtPassword2ActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+        // take no action here
     }                                            
 
     /**
