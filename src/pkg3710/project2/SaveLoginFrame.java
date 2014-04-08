@@ -128,14 +128,17 @@ public class SaveLoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents                        
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here
     }                                           
 
     @SuppressWarnings("empty-statement")
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here
     }                                           
 
+    /*
+    This fucniton will read in a username and password
+    */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here: 
         String username = txtUsername.getText();
