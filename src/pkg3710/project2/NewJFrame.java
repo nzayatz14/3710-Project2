@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg3710.project2;
+//package pkg3710.project2;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -268,18 +268,26 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents                        
 
+    //if exit is hit. close the program
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         System.exit(0);
     }                                          
 
+    //if jButton1 (go button) is hit
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        //get a double out of the text file for the wager
         Double wager = Double.parseDouble(txtAmount.getText());
+        
+        //if the wager is valid, run the swaps, if not, print an error
         if (player.CheckWager(wager) == true) {
+            //try to make the swaps
             try {
                 jButton1.setEnabled(false);
                 Ball1.setVisible(true);
                 Random r = new Random();
                 //placeAndMoveBallUp();
+                
+                //generate a random number under which position the ball will be and set the balls position
                 final int place = r.nextInt(3);
                 final int x;
                 if (place == 0) {
@@ -291,12 +299,18 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
                 Ball1.setLocation(x, btnCup1.getY() + 20);
                 
+                //run the round from the round class and generate the swaps, each swap will be in the 
+                //integer format "abcd"
+                //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
                 int swaps[] = game.runRound(place);
+                
+                //call the first graphical swap with the array of swaps, beginning at position 0
                 swapGraphics(swaps, 0);
             } catch (Exception ex) {
 
             }
         } else {
+            //if there is a problem with the wager, erase the input in the textBox and set the focus of the program to the text box
             txtAmount.setText("");
             txtAmount.requestFocus();
         }
@@ -306,14 +320,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }                                         
 
+    //if the menu button "Load" is hit, create a new LoadLoginFrame
     private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                        
         new LoadLoginFrame().setVisible(true);
     }                                       
-
+    
+    //if the menu button "Save" is hit, create a new SaveLoginFrame
     private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
         new SaveLoginFrame().setVisible(true);
     }                                       
 
+    //if Cup1 button is hit
     private void btnCup1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
@@ -321,13 +338,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton1.setEnabled(true);
     }                                       
 
+    //if Cup2 button is hit
     private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
         btnCup3.setEnabled(false);
         jButton1.setEnabled(true);
     }                                       
-
+    
+    //if Cup3 button is hit
     private void btnCup3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
@@ -351,6 +370,14 @@ public class NewJFrame extends javax.swing.JFrame {
         winPercentField.setText(winPercent);
     }                                               
 
+    /*This function takes in the parameters of which cup is at position 1 and position 2 respectively.
+    It also takes in the list of swaps to be made and the current swap being made. The function then 
+    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+    is cancelled.*/
     public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -419,6 +446,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }
 
+    /*This function takes in the parameters of which cup is at position 1 and position 3 respectively.
+    It also takes in the list of swaps to be made and the current swap being made. The function then 
+    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+    is cancelled.*/
     public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -486,6 +521,14 @@ public class NewJFrame extends javax.swing.JFrame {
         }, 0, 1);
     }
 
+    /*This function takes in the parameters of which cup is at position 2 and position 3 respectively.
+    It also takes in the list of swaps to be made and the current swap being made. The function then 
+    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+    is cancelled.*/
     public void swap2and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -553,6 +596,11 @@ public class NewJFrame extends javax.swing.JFrame {
         }, 0, 1);
     }
 
+    /*This function takes in the list of swaps to be made and the current swap being made. If there are
+    still swaps to be made, the encoded number is decoded to show that Cup 'cupNum1' needs to be moved to 
+    'a' and Cup 'cupNum2' needs to be moved to 'b'. After this is determined, the proper function is called
+    in order to graphically make these swaps. If no more swaps need to be made, the option buttons are enabled
+    in order to allow the user to guess where the ball is.*/
     public void swapGraphics(int sw[], int s) {
         if (sw.length > s) {
             int temp = sw[s];
@@ -577,9 +625,12 @@ public class NewJFrame extends javax.swing.JFrame {
             btnCup3.setEnabled(true);
         }
     }
-
+    
+    /*This function is used to place the ball initially and move the ball up.*/
     private void placeAndMoveBallUp() {
         Random r = new Random();
+        
+        //generate a random number under which position the ball will be and set the balls position
         final int place = r.nextInt(3);
         final int x;
         if (place == 0) {
@@ -591,12 +642,16 @@ public class NewJFrame extends javax.swing.JFrame {
         }
 
         Ball1.setLocation(x, btnCup1.getY() + 20);
+        
+        //Create a time to move the ball from the placed position upward until it is under one of the cups
         Timer time = new Timer();
 
         System.out.println(place + " " + Ball1.getLocation());
         time.schedule(new TimerTask() {
             @Override
             public void run() {
+                //if the ball is under to position it needs to be, move it up a pixil, if not, 
+                //hide the ball object, calculate the swaps and call swapGraphics()
                 if (Ball1.getY() > (Cup1.getY() - Ball1.getHeight() + Cup1.getHeight())) {
                     Ball1.setLocation(x, Ball1.getY() - 1);
                     // System.out.println(Ball1.getLocation());
@@ -607,6 +662,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     this.cancel();
                 }
             }
+            //stall for 2 seconds (2000ms) so the user can see the ball before it moves up
         }, 2000, 4);
     }
 
