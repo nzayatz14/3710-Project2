@@ -91,6 +91,10 @@ public class Game {
     //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
     public int[] runRound(int place)
     {
+        //reset the cups so none of them 'contain the ball'
+        for(int i = 0;i<cups.length;i++){
+            cups[i].setContains(false);
+        }
         //set the cup at place to contain the ball
         cups[place].setContains(true);
         
@@ -122,7 +126,9 @@ public class Game {
             cups[a].setPosition(a);
             cups[b].setPosition(b);
             
-            //calcuate the integer needed to represent the swap in the array then add it to the array
+            //The swapCall creates a 4 digit integer “abcd” which basically says “Cup ‘a’ moves 
+            //to position ‘b’ and Cup ‘c’ moves to position ‘d’” to represent 1 move. All of these 
+            //combos are added to an array and sent to the newJFrame to make the swaps happen graphically
             int swapCall = (cups[a].getNumber()*1000)+(a*100)+(cups[b].getNumber()*10)+b;
             swap[i] = swapCall;
             
