@@ -2,22 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg3710.project2;
+//package pkg3710.project2;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Random;
+import javax.swing.JLabel;
 
 /**
  *
  * @author nzayatz14
  */
 public class NewJFrame extends javax.swing.JFrame {
-
+    JLabel cups[] = new JLabel[3];
     Game game = new Game();
     Player player = new Player();
 
@@ -32,6 +33,10 @@ public class NewJFrame extends javax.swing.JFrame {
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
         btnCup3.setEnabled(false);
+        cups[0]=Cup1;
+        cups[1] = Cup2;
+        cups[2] = Cup3;
+        int cupPlaces[] = {1,2,3};
     }
 
     /**
@@ -69,13 +74,13 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cup Game Bruh");
 
-        Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
         Cup1.setText("1");
 
-        Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
         Cup2.setText("2");
 
-        Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
+        Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
         Cup3.setText("3");
 
         jButton1.setText("Go!");
@@ -122,7 +127,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         MoneyLeft.setText("Money Left:");
 
-        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
+        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("ball.png"))); // NOI18N
 
         balanceTxtField.setEditable(false);
         balanceTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +382,7 @@ public class NewJFrame extends javax.swing.JFrame {
     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.*/
+    is cancelled.
     public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -453,7 +458,7 @@ public class NewJFrame extends javax.swing.JFrame {
     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.*/
+    is cancelled.
     public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -528,7 +533,7 @@ public class NewJFrame extends javax.swing.JFrame {
     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.*/
+    is cancelled.
     public void swap2and3(int cupNumber1, int cupNumber2, int sw[], int s) {
         Timer time = new Timer();
         final int Cup1X = Cup1.getX();
@@ -594,7 +599,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
             }
         }, 0, 1);
-    }
+    }*/
 
     /*This function takes in the list of swaps to be made and the current swap being made. If there are
     still swaps to be made, the encoded number is decoded to show that Cup 'cupNum1' needs to be moved to 
@@ -611,14 +616,14 @@ public class NewJFrame extends javax.swing.JFrame {
             int cupNum2 = temp / 10;
             temp = temp % 10;
             int b = temp;
-            //System.out.println(cupNum1 + " " + a + " " + cupNum2 + " " + b);
-            if (a == 0 && b == 1) {
-                swap1and2(cupNum1, cupNum2, sw, s);
-            } else if (a == 0 && b == 2) {
-                swap1and3(cupNum1, cupNum2, sw, s);
-            } else {
-                swap2and3(cupNum1, cupNum2, sw, s);
-            }
+            
+            //if (a == 0 && b == 1) {
+                makeSwapGraphically(cupNum1, cupNum2, sw, s, a, b);
+            //} else if (a == 0 && b == 2) {
+            //    swap1and3(cupNum1, cupNum2, sw, s);
+            //} else {
+            //    swap2and3(cupNum1, cupNum2, sw, s);
+            //}
         } else {
             btnCup1.setEnabled(true);
             btnCup2.setEnabled(true);
@@ -626,7 +631,33 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
     
-    /*This function is used to place the ball initially and move the ball up.*/
+    public void makeSwapGraphically(int cupNum1, int cupNum2, int sw[], int s, int a, int b){
+        Timer time = new Timer();
+        final int Cup1X = cups[cupNum1-1].getX();
+        final int Cup2X = cups[cupNum2-1].getX();
+        final int cupNumber1 = cupNum1-1;
+        final int cupNumber2 = cupNum2-1;
+        final int swa[] = sw;
+        final int d = s;
+        final int from = a+1;
+        final int to = b+1;
+        
+        //System.out.println(cupNum1 + " from " +to+" to "+ from + " " + cupNum2 + "from "+from + " to " + to);
+        
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (cups[cupNumber1].getX() > Cup2X) {
+                        cups[cupNumber1].setLocation(cups[cupNumber1].getX() - 1, JFrameSupport.findCurve(to, from, cups[cupNumber1].getX() - 1));
+                        cups[cupNumber2].setLocation(cups[cupNumber2].getX() + 1, JFrameSupport.findCurve(from, to, cups[cupNumber2].getX() + 1));
+                    } else {
+                        swapGraphics(swa, d + 1);
+                        this.cancel();
+                    }
+            }
+        }, 0, 1);
+    }
+    /*This function is used to place the ball initially and move the ball u p.*/
     private void placeAndMoveBallUp() {
         Random r = new Random();
         
