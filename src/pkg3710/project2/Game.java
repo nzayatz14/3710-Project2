@@ -1,4 +1,4 @@
-package pkg3710.project2;
+//package pkg3710.project2;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,8 +17,8 @@ public class Game {
     int correct;
     int guesses;
     int level;
-    Player p = new Player();
-    final int SWAPS = 5;
+    Player p;
+    int SWAPS = 5;
     double money;
     Cup cups[]={new Cup(0,false,1), new Cup(1,false,2),new Cup(2,false,3)};
     
@@ -26,8 +26,9 @@ public class Game {
     {
         correct = 0;
         guesses = 0;
-        level = 0;
-        money = 0;
+        level = 1;
+        money = 1000;
+        p = new Player(level,money);
     }
     
     public Game(int right,int total, int diff, double cash)
@@ -36,6 +37,7 @@ public class Game {
         guesses = total;
         level = diff;
         money = cash;
+        p = new Player(level,money);
     }
     
     public int getCorrect()
@@ -80,10 +82,10 @@ public class Game {
     
     //calculate the win percentage
     public double calculateWinPercentage(){
-        int correct1 = getCorrect();
-        int guesses1 = getGuesses();
-        double winPercentage = correct1 / guesses1;
-        return winPercentage;
+        if(guesses != 0)
+        	return (correct/(double)(guesses)) *100;
+        else
+        	return 0;
     }
     
     //In: the position of which the ball will be hiding under
@@ -91,6 +93,7 @@ public class Game {
     //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
     public int[] runRound(int place)
     {
+    	SWAPS = (int) (5 + .5*(double)level);
         //reset the cups so none of them 'contain the ball'
         for(int i = 0;i<cups.length;i++){
             cups[i].setContains(false);
@@ -132,9 +135,26 @@ public class Game {
             int swapCall = (cups[a].getNumber()*1000)+(a*100)+(cups[b].getNumber()*10)+b;
             swap[i] = swapCall;
             
-            //System.out.println(a + " " + b+" "+swapCall + cups[0].getNumber() + " " +cups[1].getNumber() + " " +cups[2].getNumber());
+            //System.out.println(a + " " + b+" "+swapCall+" " + cups[0].getNumber() + " " +cups[1].getNumber() + " " +cups[2].getNumber());
         }
         
         return swap;
+    }
+    
+    public boolean guess(int cup, double wager){
+    	guesses++;   	
+    	if(cups[cup].containsBall()){
+    		money += wager;
+    		correct++;
+    		level++;
+    		return true;
+    	}else{
+    		money -= wager;
+    		return false;
+    	}
+    }
+    
+    public Player getPlayer(){
+    	return p;
     }
 }
