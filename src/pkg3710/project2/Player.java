@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pkg3710.project2;
+//package pkg3710.project2;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Player {
 
     private String Username;
-    private int balance;
+    private double balance;
     int WinPercentage;
     String userName;
     int level;
@@ -30,7 +30,12 @@ public class Player {
         balance = 100;
     }
     
-    public int balance(){
+    public Player(int l, double b){
+    	level= l;
+    	balance = b;
+    }
+    
+    public double balance(){
         return balance;
     }
     //This function can probably be deleted as we now have a getbalance function. Left for purposes of maintaining the 
@@ -49,14 +54,14 @@ public class Player {
     Withdraw - this is the framework for the functionality of withdrawing money from the users "bank" account balance 
     in the event that the user  loses a round in the game.
     */
-    public int withdraw(int wager1) {
+    public double withdraw(double wager1) {
         return balance - wager1;   
     }
     /*
     Deposit - this is the framework for the functionality to deposit money into the users "bank" account in the event 
     that the user wins a round. 
     */
-    public int deposit(int win1){
+    public double deposit(double win1){
         return balance += win1;
     }
 
