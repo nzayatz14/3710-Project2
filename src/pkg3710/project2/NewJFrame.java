@@ -5,12 +5,10 @@
 //package pkg3710.project2;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.swing.JLabel;
 
 /**
@@ -20,7 +18,18 @@ import javax.swing.JLabel;
 public class NewJFrame extends javax.swing.JFrame {
     JLabel cups[] = new JLabel[3];
     Game game = new Game();
-    Player player = new Player();
+    int cupWithBall = -1;
+    double bet = 0;
+    int cupPlaces[] = {1,2,3};
+    //Point p[] = new Point[3];
+    //Point ballLocation;
+    
+    
+    final int yAxisCups = 43;
+    final int liftCupInterval = 25;
+    final int liftCupWait = 1000;
+    final int displayBallTime = 3000;
+    final int liftBallTime = 10;
 
     //private JFrameSupport support = new JFrameSupport();
     /**
@@ -36,7 +45,13 @@ public class NewJFrame extends javax.swing.JFrame {
         cups[0]=Cup1;
         cups[1] = Cup2;
         cups[2] = Cup3;
-        int cupPlaces[] = {1,2,3};
+        //Ball1.setVisible(false);
+       // p[0] = Cup1.getLocation();
+       // p[1] = Cup2.getLocation();
+       // p[2] = Cup3.getLocation();
+       // ballLocation = Ball1.getLocation();
+        
+        updateWindow();
     }
 
     /**
@@ -284,12 +299,13 @@ public class NewJFrame extends javax.swing.JFrame {
         Double wager = Double.parseDouble(txtAmount.getText());
         
         //if the wager is valid, run the swaps, if not, print an error
-        if (player.CheckWager(wager) == true) {
+        if (game.getPlayer().CheckWager(wager) == true) {
             //try to make the swaps
+        	bet = wager;
             try {
                 jButton1.setEnabled(false);
-                Ball1.setVisible(true);
-                Random r = new Random();
+                placeAndMoveBallUp();
+                /*Random r = new Random();
                 //placeAndMoveBallUp();
                 
                 //generate a random number under which position the ball will be and set the balls position
@@ -302,15 +318,38 @@ public class NewJFrame extends javax.swing.JFrame {
                 } else {
                     x = btnCup3.getX();
                 }
+                System.out.println(place);
                 Ball1.setLocation(x, btnCup1.getY() + 20);
+               // ballLocation = new Point(x, btnCup1.getY() + 20);
+                //Ball1.setVisible(true);
                 
-                //run the round from the round class and generate the swaps, each swap will be in the 
-                //integer format "abcd"
-                //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
-                int swaps[] = game.runRound(place);
+                cupWithBall = place;
                 
-                //call the first graphical swap with the array of swaps, beginning at position 0
-                swapGraphics(swaps, 0);
+                Timer displayBall = new Timer();
+                displayBall.schedule(new TimerTask() {
+                	@Override
+                	public void run(){
+                		if(Ball1.getY()>yAxisCups)
+                			Ball1.setLocation(Ball1.getX(), Ball1.getY()-1);
+                		else{
+                			//run the round from the round class and generate the swaps, each swap will be in the 
+                            //integer format "abcd"
+                            //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
+                            int swaps[] = game.runRound(place);
+                            
+                            //call the first graphical swap with the array of swaps, beginning at position 0
+                            swapGraphics(swaps, 0);
+                            this.cancel();
+                		}
+                	}
+                },displayBallTime,liftBallTime);
+                
+                
+                //Ball1.setVisible(true);*/
+                
+                
+                
+                
             } catch (Exception ex) {
 
             }
@@ -336,27 +375,96 @@ public class NewJFrame extends javax.swing.JFrame {
     }                                       
 
     //if Cup1 button is hit
-    private void btnCup1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        btnCup1.setEnabled(false);
-        btnCup2.setEnabled(false);
-        btnCup3.setEnabled(false);
-        jButton1.setEnabled(true);
+    private void btnCup1ActionPerformed(java.awt.event.ActionEvent evt) {
+    	boolean correct = game.guess(0,bet);
+    	
+    	if(correct){
+    		//set ball position to under cup
+    		Ball1.setLocation(btnCup1.getX(), btnCup1.getY() - 70);
+    		//ballLocation = new Point(btnCup1.getX(), btnCup1.getY() - 70);
+    		//Ball1.setVisible(true);
+    	}
+    	
+    	//lift cup
+    	final int guess = cupPlaces[0]-1;
+    	Timer t = new Timer();
+    	t.schedule(new TimerTask() {
+    		@Override
+    		public void run(){
+    			if(cups[guess].getY()>1){
+    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+    			}else{
+    				updateWindow();
+    		        btnCup1.setEnabled(false);
+    		        btnCup2.setEnabled(false);
+    		        btnCup3.setEnabled(false);
+    		        jButton1.setEnabled(true);
+    		        this.cancel();
+    			}
+    		}
+    	}, liftCupWait, liftCupInterval);
     }                                       
 
     //if Cup2 button is hit
-    private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        btnCup1.setEnabled(false);
-        btnCup2.setEnabled(false);
-        btnCup3.setEnabled(false);
-        jButton1.setEnabled(true);
+    private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {  
+    	boolean correct = game.guess(1,bet);
+    	
+    	if(correct){
+    		//set ball position to under cup
+    		Ball1.setLocation(btnCup2.getX(), btnCup1.getY() - 70);
+    		//ballLocation = new Point(btnCup2.getX(), btnCup1.getY() - 70);
+    		//Ball1.setVisible(true);
+    	}
+    	
+    	//lift cup
+    	final int guess = cupPlaces[1]-1;
+    	Timer t = new Timer();
+    	t.schedule(new TimerTask() {
+    		@Override
+    		public void run(){
+    			if(cups[guess].getY()>1){
+    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+    			}else{
+    				updateWindow();
+    		        btnCup1.setEnabled(false);
+    		        btnCup2.setEnabled(false);
+    		        btnCup3.setEnabled(false);
+    		        jButton1.setEnabled(true);
+    		        this.cancel();
+    			}
+    		}
+    	}, liftCupWait, liftCupInterval);
     }                                       
     
     //if Cup3 button is hit
-    private void btnCup3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        btnCup1.setEnabled(false);
-        btnCup2.setEnabled(false);
-        btnCup3.setEnabled(false);
-        jButton1.setEnabled(true);
+    private void btnCup3ActionPerformed(java.awt.event.ActionEvent evt) {
+    	boolean correct = game.guess(2,bet);
+    	
+    	if(correct){
+    		//set ball position to under cup
+    		Ball1.setLocation(btnCup3.getX(), btnCup1.getY() - 70);
+    		//ballLocation = new Point(btnCup3.getX(), btnCup1.getY() - 70);
+    		//Ball1.setVisible(true);
+    	}
+    	
+    	//lift cup
+    	final int guess = cupPlaces[2]-1;
+    	Timer t = new Timer();
+    	t.schedule(new TimerTask() {
+    		@Override
+    		public void run(){
+    			if(cups[guess].getY()>1){
+    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+    			}else{
+    				updateWindow();
+    		        btnCup1.setEnabled(false);
+    		        btnCup2.setEnabled(false);
+    		        btnCup3.setEnabled(false);
+    		        jButton1.setEnabled(true);
+    		        this.cancel();
+    			}
+    		}
+    	}, liftCupWait, liftCupInterval);
     }                                       
 
     private void balanceTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -369,11 +477,21 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void winPercentFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-
-        //the below 2 lines will go in the function after you click the 3 cup buttons
-        String winPercent = String.valueOf(player.getWinPercentage());
-        winPercentField.setText(winPercent);
-    }                                               
+    }  
+    
+    private void updateWindow(){
+    	levelField.setText(game.getLevel()+"");
+    	balanceTxtField.setText(game.getMoney()+"");
+    	winPercentField.setText(game.calculateWinPercentage()+"");
+    	txtAmount.setText("");
+        txtAmount.requestFocus();
+        
+        for(int i = 0;i<cups.length;i++){
+        	cups[i].setLocation(cups[i].getX(), yAxisCups);
+        }
+        
+        //Ball1.setLocation(ballLocation);
+    }
 
     /*This function takes in the parameters of which cup is at position 1 and position 2 respectively.
     It also takes in the list of swaps to be made and the current swap being made. The function then 
@@ -617,14 +735,21 @@ public class NewJFrame extends javax.swing.JFrame {
             temp = temp % 10;
             int b = temp;
             
+            //updateWindow();
+            int swapTemp = cupPlaces[a];
+            cupPlaces[a] = cupPlaces[b];
+            cupPlaces[b] = swapTemp;
+            
+            //System.out.println(cupNum1 + " " + cupNum2 + " " );
             //if (a == 0 && b == 1) {
-                makeSwapGraphically(cupNum1, cupNum2, sw, s, a, b);
+            makeSwapGraphically(cupNum1, cupNum2, sw, s, a, b);
             //} else if (a == 0 && b == 2) {
             //    swap1and3(cupNum1, cupNum2, sw, s);
             //} else {
             //    swap2and3(cupNum1, cupNum2, sw, s);
             //}
         } else {
+        	//updateWindow();
             btnCup1.setEnabled(true);
             btnCup2.setEnabled(true);
             btnCup3.setEnabled(true);
@@ -643,14 +768,23 @@ public class NewJFrame extends javax.swing.JFrame {
         final int to = b+1;
         
         //System.out.println(cupNum1 + " from " +to+" to "+ from + " " + cupNum2 + "from "+from + " to " + to);
-        
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (cups[cupNumber1].getX() > Cup2X) {
                         cups[cupNumber1].setLocation(cups[cupNumber1].getX() - 1, JFrameSupport.findCurve(to, from, cups[cupNumber1].getX() - 1));
                         cups[cupNumber2].setLocation(cups[cupNumber2].getX() + 1, JFrameSupport.findCurve(from, to, cups[cupNumber2].getX() + 1));
+                        
+                        if(cupNumber1 == cupWithBall){
+                        	Ball1.setLocation(cups[cupNumber1].getLocation());        	
+                        }else if(cupNumber2 == cupWithBall){
+                        	Ball1.setLocation(cups[cupNumber2].getLocation());	
+                        }
                     } else {
+                    	cups[cupNumber1].setLocation(cups[cupNumber1].getX(), yAxisCups);
+                    	cups[cupNumber2].setLocation(cups[cupNumber2].getX(), yAxisCups);
+                    	Ball1.setLocation(Ball1.getX(), yAxisCups);
+                    	//updateWindow();
                         swapGraphics(swa, d + 1);
                         this.cancel();
                     }
@@ -659,7 +793,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     /*This function is used to place the ball initially and move the ball u p.*/
     private void placeAndMoveBallUp() {
-        Random r = new Random();
+    	Random r = new Random();
+        //placeAndMoveBallUp();
         
         //generate a random number under which position the ball will be and set the balls position
         final int place = r.nextInt(3);
@@ -671,30 +806,31 @@ public class NewJFrame extends javax.swing.JFrame {
         } else {
             x = btnCup3.getX();
         }
-
+        //System.out.println(place);
         Ball1.setLocation(x, btnCup1.getY() + 20);
+       // ballLocation = new Point(x, btnCup1.getY() + 20);
+        //Ball1.setVisible(true);
         
-        //Create a time to move the ball from the placed position upward until it is under one of the cups
-        Timer time = new Timer();
-
-        System.out.println(place + " " + Ball1.getLocation());
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                //if the ball is under to position it needs to be, move it up a pixil, if not, 
-                //hide the ball object, calculate the swaps and call swapGraphics()
-                if (Ball1.getY() > (Cup1.getY() - Ball1.getHeight() + Cup1.getHeight())) {
-                    Ball1.setLocation(x, Ball1.getY() - 1);
-                    // System.out.println(Ball1.getLocation());
-                } else {
-                    Ball1.setVisible(false);
+        cupWithBall = cupPlaces[place]-1;
+        
+        Timer displayBall = new Timer();
+        displayBall.schedule(new TimerTask() {
+        	@Override
+        	public void run(){
+        		if(Ball1.getY()>yAxisCups)
+        			Ball1.setLocation(Ball1.getX(), Ball1.getY()-1);
+        		else{
+        			//run the round from the round class and generate the swaps, each swap will be in the 
+                    //integer format "abcd"
+                    //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
                     int swaps[] = game.runRound(place);
+                    
+                    //call the first graphical swap with the array of swaps, beginning at position 0
                     swapGraphics(swaps, 0);
                     this.cancel();
-                }
-            }
-            //stall for 2 seconds (2000ms) so the user can see the ball before it moves up
-        }, 2000, 4);
+        		}
+        	}
+        },displayBallTime,liftBallTime);
     }
 
     /**
