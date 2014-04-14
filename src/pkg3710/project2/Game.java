@@ -147,9 +147,11 @@ public class Game {
     		money += wager;
     		correct++;
     		level++;
+    		p.deposit(wager);
     		return true;
     	}else{
     		money -= wager;
+    		p.withdraw(wager);
     		return false;
     	}
     }
