@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-//package pkg3710.project2;
+package pkg3710.project2;
 
 /**
  *
