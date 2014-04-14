@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//package pkg3710.project2;
+package pkg3710.project2;
 
 import java.awt.Color;
 import java.util.Random;
@@ -89,13 +89,13 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cup Game Bruh");
 
-        Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
+        Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
         Cup1.setText("1");
 
-        Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
+        Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
         Cup2.setText("2");
 
-        Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
+        Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/imgres.jpg"))); // NOI18N
         Cup3.setText("3");
 
         jButton1.setText("Go!");
@@ -142,7 +142,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         MoneyLeft.setText("Money Left:");
 
-        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("ball.png"))); // NOI18N
+        Ball1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg3710/project2/ball.png"))); // NOI18N
 
         balanceTxtField.setEditable(false);
         balanceTxtField.addActionListener(new java.awt.event.ActionListener() {
