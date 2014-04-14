@@ -103,7 +103,7 @@ public class Player {
     public Boolean CheckWager(double money)
     {
         Component ErrorFrame = null;
-        if(money > balance){
+        if(money > balance || money <= 0){
           JOptionPane.showMessageDialog(ErrorFrame, "You do not have enough funds to place that bet.", "Error", JOptionPane.ERROR_MESSAGE);
           return false;
         }else{
