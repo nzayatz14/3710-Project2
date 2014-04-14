@@ -1,4 +1,4 @@
-//package pkg3710.project2;
+package pkg3710.project2;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
