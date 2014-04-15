@@ -154,7 +154,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         //read the file, if the username is in the file, continue    
         while (userExists==false && in.hasNextLine())
         {
-          String line = scanner.nextLine();
+          String line = in.nextLine();
           if(line.equals(username)){
               userExists=true;
           }

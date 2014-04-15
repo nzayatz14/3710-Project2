@@ -30,6 +30,7 @@ public class NewJFrame extends javax.swing.JFrame {
     final int liftCupWait = 1000;
     final int displayBallTime = 3000;
     final int liftBallTime = 10;
+    final int cupPixelTime = 1;
 
     //private JFrameSupport support = new JFrameSupport();
     /**
@@ -296,13 +297,17 @@ public class NewJFrame extends javax.swing.JFrame {
     //if jButton1 (go button) is hit
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //get a double out of the text file for the wager
-        Double wager = Double.parseDouble(txtAmount.getText());
+        Double wager;
+        try{
+            wager = Double.parseDouble(txtAmount.getText());
+        }catch (Exception ex){
+            wager = -1.0;
+        }
         
         //if the wager is valid, run the swaps, if not, print an error
         if (game.getPlayer().CheckWager(wager) == true) {
             //try to make the swaps
         	bet = wager;
-            try {
                 jButton1.setEnabled(false);
                 txtAmount.setEnabled(false);
                 placeAndMoveBallUp();
@@ -347,13 +352,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 
                 
                 //Ball1.setVisible(true);*/
-                
-                
-                
-                
-            } catch (Exception ex) {
-
-            }
+        
         } else {
             //if there is a problem with the wager, erase the input in the textBox and set the focus of the program to the text box
             txtAmount.setText("");
@@ -793,7 +792,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         this.cancel();
                     }
             }
-        }, 0, 1);
+        }, 0, cupPixelTime);
     }
     /*This function is used to place the ball initially and move the ball u p.*/
     private void placeAndMoveBallUp() {
