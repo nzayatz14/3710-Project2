@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import java.io.*;
+import java.util.Scanner;
 /**
  *
  * @author greyson233
@@ -135,6 +137,7 @@ public class CreateNewUser extends javax.swing.JFrame {
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
         BufferedWriter bw = null;
         Component ErrorFrame = null;
+        //Scanner reader = new Scanner(new File("users.txt"));
 
         String username = txtUsername.getText();
         char[] pass = txtPassword.getPassword();
@@ -150,8 +153,7 @@ public class CreateNewUser extends javax.swing.JFrame {
                 bw.write("\n");
                 bw.close();
                 
-                //bw = new BufferedWriter(new FileWriter(users.txt, true));
-                //bw.open(usernames.txt);
+                bw = new BufferedWriter(new FileWriter("users.txt", true));
                 bw.write(username);
                 bw.write("\n");
                 bw.close();
