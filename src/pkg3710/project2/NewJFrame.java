@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//package pkg3710.project2;
+package pkg3710.project2;
 
 import java.awt.Color;
 import java.util.Random;
