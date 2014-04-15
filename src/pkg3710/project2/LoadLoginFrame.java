@@ -189,7 +189,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 //ask if user wants to continue from this last state or start a new game
                 JOptionPane.showMessageDialog(null, "Passwords match!");
 
-                //!!!save session data (amount of money in account, score)
+                //!!!load session data (amount of money in account, score)
 
                 //?connecct to appropriate screen
             }
@@ -199,7 +199,8 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 //clear the text box
                 txtPassword.setText("");
-                txtPassword.requestFocus();
+                txtUsername.setText("");
+                txtUsername.requestFocus();
         }
     }                                           
 
