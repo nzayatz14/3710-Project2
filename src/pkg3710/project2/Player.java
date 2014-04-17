@@ -107,7 +107,6 @@ public class Player {
           JOptionPane.showMessageDialog(ErrorFrame, "You do not have enough funds to place that bet.", "Error", JOptionPane.ERROR_MESSAGE);
           return false;
         }else{
-          JOptionPane.showMessageDialog(null, "You have sufficient funds to place that bet."); 
           PlaceBet(money);
           return true;
         }    

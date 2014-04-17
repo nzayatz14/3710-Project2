@@ -91,13 +91,13 @@ public class NewJFrame extends javax.swing.JFrame {
         setTitle("Cup Game Bruh");
 
         Cup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
-        Cup1.setText("1");
+        //Cup1.setText("1");
 
         Cup2.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
-        Cup2.setText("2");
+        //Cup2.setText("2");
 
         Cup3.setIcon(new javax.swing.ImageIcon(getClass().getResource("imgres.jpg"))); // NOI18N
-        Cup3.setText("3");
+        //Cup3.setText("3");
 
         jButton1.setText("Go!");
         jButton1.setToolTipText("");
@@ -209,9 +209,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .add(btnCup1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(btnCup2)
-                .add(152, 152, 152)
+                .add(140, 140, 140)
                 .add(btnCup3)
-                .add(103, 103, 103))
+                .add(80, 80, 80))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
