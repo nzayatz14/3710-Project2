@@ -366,12 +366,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
     //if the menu button "Load" is hit, create a new LoadLoginFrame
     private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        new LoadLoginFrame().setVisible(true);
+        new LoadLoginFrame(game).setVisible(true);
     }                                       
     
     //if the menu button "Save" is hit, create a new SaveLoginFrame
     private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        new SaveLoginFrame().setVisible(true);
+        new SaveLoginFrame(game).setVisible(true);
     }                                       
 
     //if Cup1 button is hit

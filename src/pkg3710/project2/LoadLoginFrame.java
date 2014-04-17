@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author greyson233
  */
 public class LoadLoginFrame extends javax.swing.JFrame {
-
+    Game game;
     /**
      * Creates new form LoginFrame
      */
@@ -29,6 +29,10 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    public LoadLoginFrame(Game g){
+        game = g;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +79,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
             }
         });
 
-        buttonEnter.setText("Login");
+        buttonEnter.setText("Load Game");
         buttonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEnterActionPerformed(evt);
@@ -137,9 +141,13 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         Component ErrorFrame = null;
         Boolean userExists = false;
 
+        //intialize variables 
         String fileName = username + ".txt";
         String fileUsername = "";
         String filePassword = "";
+        
+        Game g = new Game();
+        //load game info, intialize variables? 
         
         //see if username exists
         File file = new File("users.txt");

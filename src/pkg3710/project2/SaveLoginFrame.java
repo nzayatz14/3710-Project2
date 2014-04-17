@@ -8,9 +8,11 @@ package pkg3710.project2;
 
 import java.awt.Component;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,11 +23,16 @@ import javax.swing.JOptionPane;
  * @author greyson233
  */
 public class SaveLoginFrame extends javax.swing.JFrame {
-
+    Game game;
     /**
      * Creates new form LoginFrame
      */
     public SaveLoginFrame() {
+        initComponents();
+    }
+    
+    public SaveLoginFrame(Game g){
+        game = g;
         initComponents();
     }
 
@@ -76,7 +83,7 @@ public class SaveLoginFrame extends javax.swing.JFrame {
             }
         });
 
-        buttonEnter.setText("Login");
+        buttonEnter.setText("Save Game");
         buttonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEnterActionPerformed(evt);
@@ -150,10 +157,18 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         char[] pass = txtPassword.getPassword();
         Component ErrorFrame = null;
         Boolean userExists = false;
+        BufferedWriter bw = null;
 
+        //intialize variables
         String fileName = username + ".txt";
         String fileUsername = "";
         String filePassword = "";
+        
+        //get player's game info & set to variables
+        Game g = new Game();
+        double balance = g.getPlayer().getBalance();
+        int level = g.getLevel();
+        double winpercent = g.calculateWinPercentage();
         
         //see if username exists
         File file = new File("users.txt");
@@ -204,7 +219,27 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Passwords match!");
 
                 //!!!save session data (amount of money in account, score)
-
+                try{
+                    //this will overwrite whatever is the file so the new game info will be saved over the old game info
+                    bw = new BufferedWriter(new FileWriter(fileName));
+                        //save username & password
+                    bw.write(fileUsername);
+                    bw.newLine();
+                    bw.write(filePassword);
+                    bw.newLine();
+                
+                        //save the game's info
+                    bw.write((int) balance);
+                    bw.newLine();
+                    bw.write(level);
+                    bw.newLine();
+                    bw.write((int) winpercent);
+                    bw.newLine();
+                    bw.close();
+                } catch (Exception ex){
+                    
+                }
+                
                 //?connecct to appropriate screen
                     // close the game???
             }

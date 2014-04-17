@@ -146,16 +146,18 @@ public class CreateNewUser extends javax.swing.JFrame {
         //add player's info to a text file
         if (Arrays.equals(pass, pass2)) {
             try {
+                    //write username & password to the file
                 /*BufferedWriter*/ bw = new BufferedWriter(new FileWriter(username + ".txt", true));
                 bw.write(username);
-                bw.write("\n");
+                bw.newLine();
                 bw.write(pass);
-                bw.write("\n");
+                bw.newLine();
                 bw.close();
                 
+                    //write the username to the "users.txt" file
                 bw = new BufferedWriter(new FileWriter("users.txt", true));
                 bw.write(username);
-                bw.write("\n");
+                bw.newLine();
                 bw.close();
             } catch (Exception ex) {
                 //JOptionPane.showMessageDialog(ErrorFrame, "Text File Written To file.", "Congrats!", JOptionPane.ERROR_MESSAGE);
