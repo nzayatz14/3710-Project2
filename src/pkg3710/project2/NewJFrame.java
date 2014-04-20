@@ -16,21 +16,22 @@ import javax.swing.JLabel;
  * @author nzayatz14
  */
 public class NewJFrame extends javax.swing.JFrame {
+
     JLabel cups[] = new JLabel[3];
     Game game = new Game();
     int cupWithBall = -1;
     double bet = 0;
-    int cupPlaces[] = {1,2,3};
+    int cupPlaces[] = {1, 2, 3};
     //Point p[] = new Point[3];
     //Point ballLocation;
-    
-    
+
     final int yAxisCups = 43;
     final int liftCupInterval = 25;
     final int liftCupWait = 1000;
     final int displayBallTime = 3000;
     final int liftBallTime = 10;
     final int cupPixelTime = 1;
+    private int pause = 0;
 
     //private JFrameSupport support = new JFrameSupport();
     /**
@@ -43,15 +44,15 @@ public class NewJFrame extends javax.swing.JFrame {
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
         btnCup3.setEnabled(false);
-        cups[0]=Cup1;
+        cups[0] = Cup1;
         cups[1] = Cup2;
         cups[2] = Cup3;
         //Ball1.setVisible(false);
-       // p[0] = Cup1.getLocation();
-       // p[1] = Cup2.getLocation();
-       // p[2] = Cup3.getLocation();
-       // ballLocation = Ball1.getLocation();
-        
+        // p[0] = Cup1.getLocation();
+        // p[1] = Cup2.getLocation();
+        // p[2] = Cup3.getLocation();
+        // ballLocation = Ball1.getLocation();
+
         updateWindow();
     }
 
@@ -203,530 +204,559 @@ public class NewJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(115, 115, 115)
-                .add(btnCup1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(btnCup2)
-                .add(140, 140, 140)
-                .add(btnCup3)
-                .add(80, 80, 80))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(layout.createSequentialGroup()
-                        .add(PlaceBet)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(331, 331, 331))
-            .add(layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(115, 115, 115)
+                        .add(btnCup1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(btnCup2)
+                        .add(140, 140, 140)
+                        .add(btnCup3)
+                        .add(80, 80, 80))
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(layout.createSequentialGroup()
+                                        .add(PlaceBet)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(331, 331, 331))
+                .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                                .add(40, 40, 40)
-                                .add(Cup1))
-                            .add(layout.createSequentialGroup()
-                                .add(58, 58, 58)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(levelField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(layout.createSequentialGroup()
+                                .add(layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(Level)
-                                            .add(MoneyLeft)
-                                            .add(WinPercentage))
+                                                .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                                        .add(40, 40, 40)
+                                                        .add(Cup1))
+                                                .add(layout.createSequentialGroup()
+                                                        .add(58, 58, 58)
+                                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                                .add(levelField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                                .add(layout.createSequentialGroup()
+                                                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                                .add(Level)
+                                                                                .add(MoneyLeft)
+                                                                                .add(WinPercentage))
+                                                                        .add(18, 18, 18)
+                                                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                                .add(winPercentField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                                                .add(org.jdesktop.layout.GroupLayout.TRAILING, balanceTxtField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))))
                                         .add(18, 18, 18)
-                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(winPercentField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                            .add(org.jdesktop.layout.GroupLayout.TRAILING, balanceTxtField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))))
-                        .add(18, 18, 18)
-                        .add(Cup2)
-                        .add(18, 18, 18)
-                        .add(Cup3))
-                    .add(layout.createSequentialGroup()
-                        .add(131, 131, 131)
-                        .add(Ball1)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .add(Cup2)
+                                        .add(18, 18, 18)
+                                        .add(Cup3))
+                                .add(layout.createSequentialGroup()
+                                        .add(131, 131, 131)
+                                        .add(Ball1)))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(43, 43, 43)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(Cup3)
-                    .add(Cup2)
-                    .add(Cup1))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(btnCup1)
-                    .add(btnCup3)
-                    .add(btnCup2))
-                .add(29, 29, 29)
-                .add(Ball1)
-                .add(46, 46, 46)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(PlaceBet, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButton1)
-                .add(19, 19, 19)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(MoneyLeft)
-                    .add(balanceTxtField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(Level)
-                    .add(levelField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(WinPercentage)
-                    .add(winPercentField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(83, 83, 83))
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createSequentialGroup()
+                        .add(43, 43, 43)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(Cup3)
+                                .add(Cup2)
+                                .add(Cup1))
+                        .add(18, 18, 18)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(btnCup1)
+                                .add(btnCup3)
+                                .add(btnCup2))
+                        .add(29, 29, 29)
+                        .add(Ball1)
+                        .add(46, 46, 46)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(PlaceBet, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(txtAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jButton1)
+                        .add(19, 19, 19)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(MoneyLeft)
+                                .add(balanceTxtField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(18, 18, 18)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(Level)
+                                .add(levelField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(18, 18, 18)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(WinPercentage)
+                                .add(winPercentField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(83, 83, 83))
         );
 
         pack();
     }// </editor-fold>                                                
 
     //if exit is hit. close the program
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
-    }                                          
+    }
 
     //if jButton1 (go button) is hit
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         //get a double out of the text file for the wager
         Double wager;
-        try{
+        try {
             wager = Double.parseDouble(txtAmount.getText());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             wager = -1.0;
         }
-        
+
         //if the wager is valid, run the swaps, if not, print an error
         if (game.getPlayer().CheckWager(wager) == true) {
             //try to make the swaps
-        	bet = wager;
-                jButton1.setEnabled(false);
-                txtAmount.setEnabled(false);
-                placeAndMoveBallUp();
-                /*Random r = new Random();
-                //placeAndMoveBallUp();
+            bet = wager;
+            jButton1.setEnabled(false);
+            txtAmount.setEnabled(false);
+            placeAndMoveBallUp();
+            /*Random r = new Random();
+             //placeAndMoveBallUp();
                 
-                //generate a random number under which position the ball will be and set the balls position
-                final int place = r.nextInt(3);
-                final int x;
-                if (place == 0) {
-                    x = btnCup1.getX();
-                } else if (place == 1) {
-                    x = btnCup2.getX();
-                } else {
-                    x = btnCup3.getX();
-                }
-                System.out.println(place);
-                Ball1.setLocation(x, btnCup1.getY() + 20);
-               // ballLocation = new Point(x, btnCup1.getY() + 20);
-                //Ball1.setVisible(true);
+             //generate a random number under which position the ball will be and set the balls position
+             final int place = r.nextInt(3);
+             final int x;
+             if (place == 0) {
+             x = btnCup1.getX();
+             } else if (place == 1) {
+             x = btnCup2.getX();
+             } else {
+             x = btnCup3.getX();
+             }
+             System.out.println(place);
+             Ball1.setLocation(x, btnCup1.getY() + 20);
+             // ballLocation = new Point(x, btnCup1.getY() + 20);
+             //Ball1.setVisible(true);
                 
-                cupWithBall = place;
+             cupWithBall = place;
                 
-                Timer displayBall = new Timer();
-                displayBall.schedule(new TimerTask() {
-                	@Override
-                	public void run(){
-                		if(Ball1.getY()>yAxisCups)
-                			Ball1.setLocation(Ball1.getX(), Ball1.getY()-1);
-                		else{
-                			//run the round from the round class and generate the swaps, each swap will be in the 
-                            //integer format "abcd"
-                            //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
-                            int swaps[] = game.runRound(place);
+             Timer displayBall = new Timer();
+             displayBall.schedule(new TimerTask() {
+             @Override
+             public void run(){
+             if(Ball1.getY()>yAxisCups)
+             Ball1.setLocation(Ball1.getX(), Ball1.getY()-1);
+             else{
+             //run the round from the round class and generate the swaps, each swap will be in the 
+             //integer format "abcd"
+             //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
+             int swaps[] = game.runRound(place);
                             
-                            //call the first graphical swap with the array of swaps, beginning at position 0
-                            swapGraphics(swaps, 0);
-                            this.cancel();
-                		}
-                	}
-                },displayBallTime,liftBallTime);
+             //call the first graphical swap with the array of swaps, beginning at position 0
+             swapGraphics(swaps, 0);
+             this.cancel();
+             }
+             }
+             },displayBallTime,liftBallTime);
                 
                 
-                //Ball1.setVisible(true);*/
-        
+             //Ball1.setVisible(true);*/
+
         } else {
             //if there is a problem with the wager, erase the input in the textBox and set the focus of the program to the text box
             txtAmount.setText("");
             txtAmount.requestFocus();
         }
-    }                                        
+    }
 
-    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }                                         
+    }
 
     //if the menu button "Load" is hit, create a new LoadLoginFrame
-    private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {
         new LoadLoginFrame(game).setVisible(true);
-    }                                       
-    
+    }
+
     //if the menu button "Save" is hit, create a new SaveLoginFrame
-    private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {
         new SaveLoginFrame(game).setVisible(true);
-    }                                       
+    }
 
     //if Cup1 button is hit
     private void btnCup1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	boolean correct = game.guess(0,bet);
-    	
-    	if(correct){
-    		//set ball position to under cup
-    		Ball1.setLocation(btnCup1.getX(), btnCup1.getY() - 70);
+        boolean correct = game.guess(0, bet);
+
+        if (correct) {
+            //set ball position to under cup
+            Ball1.setLocation(btnCup1.getX(), btnCup1.getY() - 70);
     		//ballLocation = new Point(btnCup1.getX(), btnCup1.getY() - 70);
-    		//Ball1.setVisible(true);
-    	}
-    	
-    	//lift cup
-    	final int guess = cupPlaces[0]-1;
-    	Timer t = new Timer();
-    	t.schedule(new TimerTask() {
-    		@Override
-    		public void run(){
-    			if(cups[guess].getY()>1){
-    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
-    			}else{
-    				updateWindow();
-    		        btnCup1.setEnabled(false);
-    		        btnCup2.setEnabled(false);
-    		        btnCup3.setEnabled(false);
-    		        jButton1.setEnabled(true);
-    		        txtAmount.setEnabled(true);
-    		        this.cancel();
-    			}
-    		}
-    	}, liftCupWait, liftCupInterval);
-    }                                       
+            //Ball1.setVisible(true);
+        }
+
+        //lift cup
+        liftCup(cupPlaces[0] - 1);
+        /*final int guess = cupPlaces[0]-1;
+         Timer t = new Timer();
+         t.schedule(new TimerTask() {
+         @Override
+         public void run(){
+         if(cups[guess].getY()>1){
+         cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+         }else{
+         updateWindow();
+         btnCup1.setEnabled(false);
+         btnCup2.setEnabled(false);
+         btnCup3.setEnabled(false);
+         jButton1.setEnabled(true);
+         txtAmount.setEnabled(true);
+         this.cancel();
+         }
+         }
+         }, liftCupWait, liftCupInterval);*/
+    }
 
     //if Cup2 button is hit
-    private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {  
-    	boolean correct = game.guess(1,bet);
-    	
-    	if(correct){
-    		//set ball position to under cup
-    		Ball1.setLocation(btnCup2.getX(), btnCup1.getY() - 70);
+    private void btnCup2ActionPerformed(java.awt.event.ActionEvent evt) {
+        boolean correct = game.guess(1, bet);
+
+        if (correct) {
+            //set ball position to under cup
+            Ball1.setLocation(btnCup2.getX(), btnCup1.getY() - 70);
     		//ballLocation = new Point(btnCup2.getX(), btnCup1.getY() - 70);
-    		//Ball1.setVisible(true);
-    	}
-    	
-    	//lift cup
-    	final int guess = cupPlaces[1]-1;
-    	Timer t = new Timer();
-    	t.schedule(new TimerTask() {
-    		@Override
-    		public void run(){
-    			if(cups[guess].getY()>1){
-    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
-    			}else{
-    				updateWindow();
-    		        btnCup1.setEnabled(false);
-    		        btnCup2.setEnabled(false);
-    		        btnCup3.setEnabled(false);
-    		        jButton1.setEnabled(true);
-    		        txtAmount.setEnabled(true);
-    		        this.cancel();
-    			}
-    		}
-    	}, liftCupWait, liftCupInterval);
-    }                                       
-    
+            //Ball1.setVisible(true);
+        }
+
+        //lift cup
+        liftCup(cupPlaces[1] - 1);
+        /*final int guess = cupPlaces[1]-1;
+         Timer t = new Timer();
+         t.schedule(new TimerTask() {
+         @Override
+         public void run(){
+         if(cups[guess].getY()>1){
+         cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+         }else{
+         updateWindow();
+         btnCup1.setEnabled(false);
+         btnCup2.setEnabled(false);
+         btnCup3.setEnabled(false);
+         jButton1.setEnabled(true);
+         txtAmount.setEnabled(true);
+         this.cancel();
+         }
+         }
+         }, liftCupWait, liftCupInterval);*/
+    }
+
     //if Cup3 button is hit
     private void btnCup3ActionPerformed(java.awt.event.ActionEvent evt) {
-    	boolean correct = game.guess(2,bet);
-    	
-    	if(correct){
-    		//set ball position to under cup
-    		Ball1.setLocation(btnCup3.getX(), btnCup1.getY() - 70);
+        boolean correct = game.guess(2, bet);
+
+        if (correct) {
+            //set ball position to under cup
+            Ball1.setLocation(btnCup3.getX(), btnCup1.getY() - 70);
     		//ballLocation = new Point(btnCup3.getX(), btnCup1.getY() - 70);
-    		//Ball1.setVisible(true);
-    	}
-    	
-    	//lift cup
-    	final int guess = cupPlaces[2]-1;
-    	Timer t = new Timer();
-    	t.schedule(new TimerTask() {
-    		@Override
-    		public void run(){
-    			if(cups[guess].getY()>1){
-    				cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
-    			}else{
-    				updateWindow();
-    		        btnCup1.setEnabled(false);
-    		        btnCup2.setEnabled(false);
-    		        btnCup3.setEnabled(false);
-    		        jButton1.setEnabled(true);
-    		        txtAmount.setEnabled(true);
-    		        this.cancel();
-    			}
-    		}
-    	}, liftCupWait, liftCupInterval);
-    }                                       
-
-    private void balanceTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
-    }                                               
-
-    private void levelFieldActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void winPercentFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
-    }  
-    
-    private void updateWindow(){
-    	levelField.setText(game.getLevel()+"");
-    	balanceTxtField.setText(game.getMoney()+"");
-    	winPercentField.setText(game.calculateWinPercentage()+"");
-    	txtAmount.setText("");
-        txtAmount.requestFocus();
-        
-        for(int i = 0;i<cups.length;i++){
-        	cups[i].setLocation(cups[i].getX(), yAxisCups);
+            //Ball1.setVisible(true);
         }
-        
+
+        //lift cup
+        liftCup(cupPlaces[2] - 1);
+        /*final int guess = cupPlaces[2]-1;
+         Timer t = new Timer();
+         t.schedule(new TimerTask() {
+         @Override
+         public void run(){
+         if(cups[guess].getY()>1){
+         cups[guess].setLocation(cups[guess].getX(), cups[guess].getY()-1);
+         }else{
+         updateWindow();
+         btnCup1.setEnabled(false);
+         btnCup2.setEnabled(false);
+         btnCup3.setEnabled(false);
+         jButton1.setEnabled(true);
+         txtAmount.setEnabled(true);
+         this.cancel();
+         }
+         }
+         }, liftCupWait, liftCupInterval);*/
+    }
+
+    private void balanceTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void levelFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void winPercentFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void liftCup(int g) {
+        btnCup1.setEnabled(false);
+        btnCup2.setEnabled(false);
+        btnCup3.setEnabled(false);
+        final int guess = g;
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //int pause = 1;
+                if (cups[guess].getY() > 1) {
+                    cups[guess].setLocation(cups[guess].getX(), cups[guess].getY() - 1);
+                }else if (pause <liftCupInterval*100){
+                    pause+=liftCupInterval;
+                    //System.out.println(pause);
+                } else {
+                    updateWindow();
+                    jButton1.setEnabled(true);
+                    txtAmount.setEnabled(true);
+                    pause = 0;
+                    this.cancel();
+                }
+            }
+        }, liftCupWait, liftCupInterval);
+    }
+
+    private void updateWindow() {
+        levelField.setText(game.getLevel() + "");
+        balanceTxtField.setText(game.getMoney() + "");
+        winPercentField.setText(game.calculateWinPercentage() + "");
+        txtAmount.setText("");
+        txtAmount.requestFocus();
+
+        for (int i = 0; i < cups.length; i++) {
+            cups[i].setLocation(cups[i].getX(), yAxisCups);
+        }
+
         //Ball1.setLocation(ballLocation);
     }
 
     /*This function takes in the parameters of which cup is at position 1 and position 2 respectively.
-    It also takes in the list of swaps to be made and the current swap being made. The function then 
-    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
-    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
-    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
-    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
-    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.
-    public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
-        Timer time = new Timer();
-        final int Cup1X = Cup1.getX();
-        final int Cup3X = Cup3.getX();
-        final int Cup2X = Cup2.getX();
-        final int cupNum1 = cupNumber1;
-        final int cupNum2 = cupNumber2;
-        final int swa[] = sw;
-        final int d = s;
+     It also takes in the list of swaps to be made and the current swap being made. The function then 
+     gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+     tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+     is cancelled.
+     public void swap1and2(int cupNumber1, int cupNumber2, int sw[], int s) {
+     Timer time = new Timer();
+     final int Cup1X = Cup1.getX();
+     final int Cup3X = Cup3.getX();
+     final int Cup2X = Cup2.getX();
+     final int cupNum1 = cupNumber1;
+     final int cupNum2 = cupNumber2;
+     final int swa[] = sw;
+     final int d = s;
 
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() > Cup2X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() > Cup3X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() > Cup3X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() > Cup1X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() > Cup1X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() > Cup2X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                }
+     time.schedule(new TimerTask() {
+     @Override
+     public void run() {
+     if (cupNum1 == 1 && cupNum2 == 2) {
+     if (Cup1.getX() > Cup2X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 1 && cupNum2 == 3) {
+     if (Cup1.getX() > Cup3X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve2to1(Cup1.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 3) {
+     if (Cup2.getX() > Cup3X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to2(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 1) {
+     if (Cup2.getX() > Cup1X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve2to1(Cup2.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 1) {
+     if (Cup3.getX() > Cup1X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to2(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 2) {
+     if (Cup3.getX() > Cup2X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve2to1(Cup3.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to2(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     }
 
-            }
-        }, 0, 1);
+     }
+     }, 0, 1);
 
-    }
+     }
 
-    /*This function takes in the parameters of which cup is at position 1 and position 3 respectively.
-    It also takes in the list of swaps to be made and the current swap being made. The function then 
-    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
-    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
-    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
-    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
-    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.
-    public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
-        Timer time = new Timer();
-        final int Cup1X = Cup1.getX();
-        final int Cup3X = Cup3.getX();
-        final int Cup2X = Cup2.getX();
-        final int cupNum1 = cupNumber1;
-        final int cupNum2 = cupNumber2;
-        final int swa[] = sw;
-        final int d = s;
+     /*This function takes in the parameters of which cup is at position 1 and position 3 respectively.
+     It also takes in the list of swaps to be made and the current swap being made. The function then 
+     gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+     tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+     is cancelled.
+     public void swap1and3(int cupNumber1, int cupNumber2, int sw[], int s) {
+     Timer time = new Timer();
+     final int Cup1X = Cup1.getX();
+     final int Cup3X = Cup3.getX();
+     final int Cup2X = Cup2.getX();
+     final int cupNum1 = cupNumber1;
+     final int cupNum2 = cupNumber2;
+     final int swa[] = sw;
+     final int d = s;
 
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() > Cup2X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() > Cup3X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() > Cup3X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() > Cup1X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() > Cup1X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() > Cup2X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                }
+     time.schedule(new TimerTask() {
+     @Override
+     public void run() {
+     if (cupNum1 == 1 && cupNum2 == 2) {
+     if (Cup1.getX() > Cup2X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 1 && cupNum2 == 3) {
+     if (Cup1.getX() > Cup3X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to1(Cup1.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 3) {
+     if (Cup2.getX() > Cup3X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve1to3(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 1) {
+     if (Cup2.getX() > Cup1X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to1(Cup2.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 1) {
+     if (Cup3.getX() > Cup1X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve1to3(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 2) {
+     if (Cup3.getX() > Cup2X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to1(Cup3.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve1to3(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     }
 
-            }
-        }, 0, 1);
-    }
+     }
+     }, 0, 1);
+     }
 
-    /*This function takes in the parameters of which cup is at position 2 and position 3 respectively.
-    It also takes in the list of swaps to be made and the current swap being made. The function then 
-    gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
-    tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
-    parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
-    each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
-    final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
-    is cancelled.
-    public void swap2and3(int cupNumber1, int cupNumber2, int sw[], int s) {
-        Timer time = new Timer();
-        final int Cup1X = Cup1.getX();
-        final int Cup3X = Cup3.getX();
-        final int Cup2X = Cup2.getX();
-        final int cupNum1 = cupNumber1;
-        final int cupNum2 = cupNumber2;
-        final int swa[] = sw;
-        final int d = s;
+     /*This function takes in the parameters of which cup is at position 2 and position 3 respectively.
+     It also takes in the list of swaps to be made and the current swap being made. The function then 
+     gets the x-coordinate of each cup at the beginning of the motions. Then the timer starts, for each
+     tick of the timer, the parabola needed to be taken to make the swap is determined. After finding the
+     parabola, a check is made to see if the cup is already at its final resting place or not. If it's not,
+     each cup is moved to the next coordinate (x,y) in their respective parabola. Once the cup is at its
+     final place, swapGraphics() is called to determine the next pair of cups to be swapped and the timer
+     is cancelled.
+     public void swap2and3(int cupNumber1, int cupNumber2, int sw[], int s) {
+     Timer time = new Timer();
+     final int Cup1X = Cup1.getX();
+     final int Cup3X = Cup3.getX();
+     final int Cup2X = Cup2.getX();
+     final int cupNum1 = cupNumber1;
+     final int cupNum2 = cupNumber2;
+     final int swa[] = sw;
+     final int d = s;
 
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (cupNum1 == 1 && cupNum2 == 2) {
-                    if (Cup1.getX() > Cup2X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 1 && cupNum2 == 3) {
-                    if (Cup1.getX() > Cup3X) {
-                        Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 3) {
-                    if (Cup2.getX() > Cup3X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
-                        Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 2 && cupNum2 == 1) {
-                    if (Cup2.getX() > Cup1X) {
-                        Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 1) {
-                    if (Cup3.getX() > Cup1X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
-                        Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                } else if (cupNum1 == 3 && cupNum2 == 2) {
-                    if (Cup3.getX() > Cup2X) {
-                        Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
-                        Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
-                    } else {
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
-                    }
-                }
+     time.schedule(new TimerTask() {
+     @Override
+     public void run() {
+     if (cupNum1 == 1 && cupNum2 == 2) {
+     if (Cup1.getX() > Cup2X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 1 && cupNum2 == 3) {
+     if (Cup1.getX() > Cup3X) {
+     Cup1.setLocation(Cup1.getX() - 1, JFrameSupport.curve3to2(Cup1.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 3) {
+     if (Cup2.getX() > Cup3X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+     Cup3.setLocation(Cup3.getX() + 1, JFrameSupport.curve2to3(Cup3.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 2 && cupNum2 == 1) {
+     if (Cup2.getX() > Cup1X) {
+     Cup2.setLocation(Cup2.getX() - 1, JFrameSupport.curve3to2(Cup2.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 1) {
+     if (Cup3.getX() > Cup1X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+     Cup1.setLocation(Cup1.getX() + 1, JFrameSupport.curve2to3(Cup1.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     } else if (cupNum1 == 3 && cupNum2 == 2) {
+     if (Cup3.getX() > Cup2X) {
+     Cup3.setLocation(Cup3.getX() - 1, JFrameSupport.curve3to2(Cup3.getX() - 1));
+     Cup2.setLocation(Cup2.getX() + 1, JFrameSupport.curve2to3(Cup2.getX() + 1));
+     } else {
+     swapGraphics(swa, d + 1);
+     this.cancel();
+     }
+     }
 
-            }
-        }, 0, 1);
-    }*/
+     }
+     }, 0, 1);
+     }*/
 
     /*This function takes in the list of swaps to be made and the current swap being made. If there are
-    still swaps to be made, the encoded number is decoded to show that Cup 'cupNum1' needs to be moved to 
-    'a' and Cup 'cupNum2' needs to be moved to 'b'. After this is determined, the proper function is called
-    in order to graphically make these swaps. If no more swaps need to be made, the option buttons are enabled
-    in order to allow the user to guess where the ball is.*/
+     still swaps to be made, the encoded number is decoded to show that Cup 'cupNum1' needs to be moved to 
+     'a' and Cup 'cupNum2' needs to be moved to 'b'. After this is determined, the proper function is called
+     in order to graphically make these swaps. If no more swaps need to be made, the option buttons are enabled
+     in order to allow the user to guess where the ball is.*/
     public void swapGraphics(int sw[], int s) {
         if (sw.length > s) {
             int temp = sw[s];
@@ -737,12 +767,12 @@ public class NewJFrame extends javax.swing.JFrame {
             int cupNum2 = temp / 10;
             temp = temp % 10;
             int b = temp;
-            
+
             //updateWindow();
             int swapTemp = cupPlaces[a];
             cupPlaces[a] = cupPlaces[b];
             cupPlaces[b] = swapTemp;
-            
+
             //System.out.println(cupNum1 + " " + cupNum2 + " " );
             //if (a == 0 && b == 1) {
             makeSwapGraphically(cupNum1, cupNum2, sw, s, a, b);
@@ -752,53 +782,54 @@ public class NewJFrame extends javax.swing.JFrame {
             //    swap2and3(cupNum1, cupNum2, sw, s);
             //}
         } else {
-        	//updateWindow();
+            //updateWindow();
             btnCup1.setEnabled(true);
             btnCup2.setEnabled(true);
             btnCup3.setEnabled(true);
         }
     }
-    
-    public void makeSwapGraphically(int cupNum1, int cupNum2, int sw[], int s, int a, int b){
+
+    public void makeSwapGraphically(int cupNum1, int cupNum2, int sw[], int s, int a, int b) {
         Timer time = new Timer();
-        final int Cup1X = cups[cupNum1-1].getX();
-        final int Cup2X = cups[cupNum2-1].getX();
-        final int cupNumber1 = cupNum1-1;
-        final int cupNumber2 = cupNum2-1;
+        final int Cup1X = cups[cupNum1 - 1].getX();
+        final int Cup2X = cups[cupNum2 - 1].getX();
+        final int cupNumber1 = cupNum1 - 1;
+        final int cupNumber2 = cupNum2 - 1;
         final int swa[] = sw;
         final int d = s;
-        final int from = a+1;
-        final int to = b+1;
-        
+        final int from = a + 1;
+        final int to = b + 1;
+
         //System.out.println(cupNum1 + " from " +to+" to "+ from + " " + cupNum2 + "from "+from + " to " + to);
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (cups[cupNumber1].getX() > Cup2X) {
-                        cups[cupNumber1].setLocation(cups[cupNumber1].getX() - 1, JFrameSupport.findCurve(to, from, cups[cupNumber1].getX() - 1));
-                        cups[cupNumber2].setLocation(cups[cupNumber2].getX() + 1, JFrameSupport.findCurve(from, to, cups[cupNumber2].getX() + 1));
-                        
-                        if(cupNumber1 == cupWithBall){
-                        	Ball1.setLocation(cups[cupNumber1].getLocation());        	
-                        }else if(cupNumber2 == cupWithBall){
-                        	Ball1.setLocation(cups[cupNumber2].getLocation());	
-                        }
-                    } else {
-                    	cups[cupNumber1].setLocation(cups[cupNumber1].getX(), yAxisCups);
-                    	cups[cupNumber2].setLocation(cups[cupNumber2].getX(), yAxisCups);
-                    	Ball1.setLocation(Ball1.getX(), yAxisCups);
-                    	//updateWindow();
-                        swapGraphics(swa, d + 1);
-                        this.cancel();
+                    cups[cupNumber1].setLocation(cups[cupNumber1].getX() - 1, JFrameSupport.findCurve(to, from, cups[cupNumber1].getX() - 1));
+                    cups[cupNumber2].setLocation(cups[cupNumber2].getX() + 1, JFrameSupport.findCurve(from, to, cups[cupNumber2].getX() + 1));
+
+                    if (cupNumber1 == cupWithBall) {
+                        Ball1.setLocation(cups[cupNumber1].getLocation());
+                    } else if (cupNumber2 == cupWithBall) {
+                        Ball1.setLocation(cups[cupNumber2].getLocation());
                     }
+                } else {
+                    cups[cupNumber1].setLocation(cups[cupNumber1].getX(), yAxisCups);
+                    cups[cupNumber2].setLocation(cups[cupNumber2].getX(), yAxisCups);
+                    Ball1.setLocation(Ball1.getX(), yAxisCups);
+                    //updateWindow();
+                    swapGraphics(swa, d + 1);
+                    this.cancel();
+                }
             }
         }, 0, cupPixelTime);
     }
     /*This function is used to place the ball initially and move the ball u p.*/
+
     private void placeAndMoveBallUp() {
-    	Random r = new Random();
+        Random r = new Random();
         //placeAndMoveBallUp();
-        
+
         //generate a random number under which position the ball will be and set the balls position
         final int place = r.nextInt(3);
         final int x;
@@ -813,27 +844,27 @@ public class NewJFrame extends javax.swing.JFrame {
         Ball1.setLocation(x, btnCup1.getY() + 20);
        // ballLocation = new Point(x, btnCup1.getY() + 20);
         //Ball1.setVisible(true);
-        
-        cupWithBall = cupPlaces[place]-1;
-        
+
+        cupWithBall = cupPlaces[place] - 1;
+
         Timer displayBall = new Timer();
         displayBall.schedule(new TimerTask() {
-        	@Override
-        	public void run(){
-        		if(Ball1.getY()>yAxisCups)
-        			Ball1.setLocation(Ball1.getX(), Ball1.getY()-1);
-        		else{
-        			//run the round from the round class and generate the swaps, each swap will be in the 
+            @Override
+            public void run() {
+                if (Ball1.getY() > yAxisCups) {
+                    Ball1.setLocation(Ball1.getX(), Ball1.getY() - 1);
+                } else {
+                    //run the round from the round class and generate the swaps, each swap will be in the 
                     //integer format "abcd"
                     //Essentially: cup 'a' is moving to position 'b' and cup 'c' is moving to position 'd'
                     int swaps[] = game.runRound(place);
-                    
+
                     //call the first graphical swap with the array of swaps, beginning at position 0
                     swapGraphics(swaps, 0);
                     this.cancel();
-        		}
-        	}
-        },displayBallTime,liftBallTime);
+                }
+            }
+        }, displayBallTime, liftBallTime);
     }
 
     /**
