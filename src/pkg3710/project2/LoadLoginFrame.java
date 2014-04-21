@@ -141,6 +141,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         char[] pass = txtPassword.getPassword();
         Component ErrorFrame = null;
         Boolean userExists = false;
+        BufferedReader br = null;
 
         //intialize variables 
         String fileName = username + ".txt";
@@ -149,7 +150,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         
         String discard = "";
         
-        int balance = 0;
+        String balance = "";
         int level = 0;
         int correct = 0;
         int guesses = 0;
@@ -182,7 +183,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
             //get password stored in the player's file
             //try, catch; save the file details
             try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            br = new BufferedReader(new FileReader(fileName));
             fileUsername = br.readLine();
             filePassword = br.readLine();
             //br.close();
@@ -203,25 +204,40 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 txtPassword.requestFocus();
             }
             else if (password.equals(filePassword)){
-                BufferedReader br = null;
                 try {
                     //ask if user wants to continue from this last state or start a new game
                     JOptionPane.showMessageDialog(null, "Passwords match!");
-                    br = new BufferedReader(new FileReader(fileName));
-                    fileUsername = br.readLine();
-                    filePassword = br.readLine();
-                    balance = br.read();
-                        discard = br.readLine(); //get new line character
+                    //br = new BufferedReader(new FileReader(fileName));
+                    //fileUsername = br.readLine();
+                    //filePassword = br.readLine();
+                    balance = br.readLine();
+                        //discard = br.readLine(); 
                     level = br.read();
-                        discard = br.readLine();
+                        discard = br.readLine(); //get new line character
                     correct = br.read();
                         discard = br.readLine();
                     guesses = br.read();
                     br.close();
                     
+                    /* 
+                    //check to see if it actually pulled the correct values
+                    JOptionPane.showMessageDialog(null, balance);
+                    JOptionPane.showMessageDialog(null, level);
+                    JOptionPane.showMessageDialog(null, correct);
+                    JOptionPane.showMessageDialog(null, guesses);
+                    */
+                    
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } 
+                
+                //convert balance from a string to a double
+                double balance2;
+                try {
+                    balance2 = Double.parseDouble(balance);
+                } catch (Exception ex) {
+                    balance2 = -1.0;
+                }
                 
                 //pass this info to the appropriate class
                 

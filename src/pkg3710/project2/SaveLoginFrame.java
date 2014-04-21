@@ -166,7 +166,7 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         
         //get player's game info & set to variables
         Game g = new Game();
-        double balance = g.getPlayer().getBalance();
+        String balance = String.valueOf(g.getPlayer().getBalance());
         int level = g.getLevel();
         int correct = g.getCorrect();
         int guesses = g.getGuesses();
@@ -231,14 +231,14 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                     bw.newLine();
                 
                         //save the game's info
-                    bw.write((int) balance);
-                    bw.newLine();
+                    bw.write(balance);
+                        bw.newLine();
                     bw.write(level);
-                    bw.newLine();
+                        bw.newLine();
                     bw.write(correct);
-                    bw.newLine();
+                        bw.newLine();
                     bw.write(guesses);
-                    bw.newLine();
+                        bw.newLine();
                     bw.close();
                 } catch (Exception ex){
                     
