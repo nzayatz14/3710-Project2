@@ -151,7 +151,9 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         
         int balance = 0;
         int level = 0;
-        int winpercent = 0;
+        int correct = 0;
+        int guesses = 0;
+        //int winpercent = 0;
         
         Game g = new Game();
         //load game info, intialize variables? 
@@ -212,8 +214,9 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                         discard = br.readLine(); //get new line character
                     level = br.read();
                         discard = br.readLine();
-                    winpercent = br.read();
+                    correct = br.read();
                         discard = br.readLine();
+                    guesses = br.read();
                     br.close();
                     
                 } catch (FileNotFoundException ex) {
@@ -221,7 +224,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 } 
                 
                 //pass this info to the appropriate class
-                    
+                
                     
                 //?connecct to appropriate screen
                     

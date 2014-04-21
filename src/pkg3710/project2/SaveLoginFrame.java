@@ -168,7 +168,9 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         Game g = new Game();
         double balance = g.getPlayer().getBalance();
         int level = g.getLevel();
-        double winpercent = g.calculateWinPercentage();
+        int correct = g.getCorrect();
+        int guesses = g.getGuesses();
+        //double winpercent = g.calculateWinPercentage();
         
         //see if username exists
         File file = new File("users.txt");
@@ -233,7 +235,9 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                     bw.newLine();
                     bw.write(level);
                     bw.newLine();
-                    bw.write((int) winpercent);
+                    bw.write(correct);
+                    bw.newLine();
+                    bw.write(guesses);
                     bw.newLine();
                     bw.close();
                 } catch (Exception ex){
