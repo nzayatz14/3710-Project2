@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,6 +147,12 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         String fileUsername = "";
         String filePassword = "";
         
+        String discard = "";
+        
+        int balance = 0;
+        int level = 0;
+        int winpercent = 0;
+        
         Game g = new Game();
         //load game info, intialize variables? 
         
@@ -176,7 +183,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             fileUsername = br.readLine();
             filePassword = br.readLine();
-            br.close();
+            //br.close();
             }catch(Exception ex){
                 //System.out.println( "Text File Written To file" );
             }
@@ -194,12 +201,30 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 txtPassword.requestFocus();
             }
             else if (password.equals(filePassword)){
-                //ask if user wants to continue from this last state or start a new game
-                JOptionPane.showMessageDialog(null, "Passwords match!");
-
-                //!!!load session data (amount of money in account, score)
-
+                BufferedReader br = null;
+                try {
+                    //ask if user wants to continue from this last state or start a new game
+                    JOptionPane.showMessageDialog(null, "Passwords match!");
+                    br = new BufferedReader(new FileReader(fileName));
+                    fileUsername = br.readLine();
+                    filePassword = br.readLine();
+                    balance = br.read();
+                        discard = br.readLine(); //get new line character
+                    level = br.read();
+                        discard = br.readLine();
+                    winpercent = br.read();
+                        discard = br.readLine();
+                    br.close();
+                    
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+                
+                //pass this info to the appropriate class
+                    
+                    
                 //?connecct to appropriate screen
+                    
             }
         }
         //else, (username not found) display an error
