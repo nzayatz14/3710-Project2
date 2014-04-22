@@ -219,15 +219,15 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                 //ask if user wants to continue from this last state or start a new game
                 JOptionPane.showMessageDialog(null, "Passwords match!");
 
-                //!!!save session data (amount of money in account, score)
+                //save session data (amount of money in account, score, level)
                 try{
                     //this will overwrite whatever is the file so the new game info will be saved over the old game info
                     bw = new BufferedWriter(new FileWriter(fileName));
                         //save username & password
                     bw.write(fileUsername);
-                    bw.newLine();
+                        bw.newLine();
                     bw.write(filePassword);
-                    bw.newLine();
+                        bw.newLine();
                 
                         //save the game's info
                     bw.write(balance);
@@ -243,14 +243,15 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                     
                 }
                 
-                //Close the save window
+                //Close the "save game" window
                 this.setVisible(false);
+                this.dispose();
         
             }
         }
-        //else, (username not found) display an error
+        //else, (username not found / doesn't exist) display an error
         else{
-                JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again or create a new username/account.", "Error", JOptionPane.ERROR_MESSAGE);
                 //clear the text box
                 txtPassword.setText("");
                 txtUsername.setText("");
@@ -259,10 +260,10 @@ public class SaveLoginFrame extends javax.swing.JFrame {
     }                                           
 
     private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+        new CreateNewUser(g).setVisible(true);
 
         //click create new user button, go to new page
-        new CreateNewUser().setVisible(true);
+        //new CreateNewUser().setVisible(true);
         this.setVisible(false);
         this.dispose();
 

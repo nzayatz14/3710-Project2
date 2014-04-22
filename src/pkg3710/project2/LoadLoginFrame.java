@@ -213,17 +213,6 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     guesses = br.readLine();
                     br.close();
                     
-                    JOptionPane.showMessageDialog(null, "test!");
-
-                    /* 
-                    //check to see if it actually pulled the correct values
-                    System.out.println(balance);
-                    JOptionPane.showMessageDialog(null, balance);
-                    JOptionPane.showMessageDialog(null, level);
-                    JOptionPane.showMessageDialog(null, correct);
-                    JOptionPane.showMessageDialog(null, guesses);
-                    */
-                    
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {

@@ -32,6 +32,7 @@ public class CreateNewUser extends javax.swing.JFrame {
     
     public CreateNewUser(Game game){
         g = game;
+        initComponents();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +60,7 @@ public class CreateNewUser extends javax.swing.JFrame {
             }
         });
 
-        buttonEnter.setText("Login");
+        buttonEnter.setText("Create New User & Save Game");
         buttonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEnterActionPerformed(evt);
@@ -155,7 +156,7 @@ public class CreateNewUser extends javax.swing.JFrame {
         //add player's info to a text file
         if (Arrays.equals(pass, pass2)) {
             try {
-                    //write username & password to the file
+                //write username & password to the file & saved game data
                 /*BufferedWriter*/ bw = new BufferedWriter(new FileWriter(username + ".txt", true));
                 bw.write(username);
                     bw.newLine();

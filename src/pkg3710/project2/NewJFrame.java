@@ -867,6 +867,10 @@ public class NewJFrame extends javax.swing.JFrame {
         }, displayBallTime, liftBallTime);
     }
 
+    public void LoadGame(Game game){
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
