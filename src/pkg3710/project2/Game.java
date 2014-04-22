@@ -75,7 +75,7 @@ public class Game {
         level = diff;
     }
     
-    public void setMoney(int cash)
+    public void setMoney(double cash)
     {
         money=cash;
     }

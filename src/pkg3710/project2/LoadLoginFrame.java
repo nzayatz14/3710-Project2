@@ -147,18 +147,14 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         String fileName = username + ".txt";
         String fileUsername = "";
         String filePassword = "";
-        
-        String discard = "";
-        
-        String balance = "";
-        int level = 0;
-        int correct = 0;
-        int guesses = 0;
-        //int winpercent = 0;
-        
+                
+        //intialize variables
         Game g = new Game();
-        //load game info, intialize variables? 
-        
+        String balance = "";
+        String level = "";
+        String correct = "";
+        String guesses = "";
+                
         //see if username exists
         File file = new File("users.txt");
             //try catch in case the file does not exist
@@ -186,7 +182,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
             br = new BufferedReader(new FileReader(fileName));
             fileUsername = br.readLine();
             filePassword = br.readLine();
-            //br.close();
+            br.close();
             }catch(Exception ex){
                 //System.out.println( "Text File Written To file" );
             }
@@ -207,20 +203,21 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 try {
                     //ask if user wants to continue from this last state or start a new game
                     JOptionPane.showMessageDialog(null, "Passwords match!");
-                    //br = new BufferedReader(new FileReader(fileName));
-                    //fileUsername = br.readLine();
-                    //filePassword = br.readLine();
+                    
+                    br = new BufferedReader(new FileReader(fileName));
+                    fileUsername = br.readLine();
+                    filePassword = br.readLine();
                     balance = br.readLine();
-                        //discard = br.readLine(); 
-                    level = br.read();
-                        discard = br.readLine(); //get new line character
-                    correct = br.read();
-                        discard = br.readLine();
-                    guesses = br.read();
+                    level = br.readLine();
+                    correct = br.readLine();
+                    guesses = br.readLine();
                     br.close();
                     
+                    JOptionPane.showMessageDialog(null, "test!");
+
                     /* 
                     //check to see if it actually pulled the correct values
+                    System.out.println(balance);
                     JOptionPane.showMessageDialog(null, balance);
                     JOptionPane.showMessageDialog(null, level);
                     JOptionPane.showMessageDialog(null, correct);
@@ -239,11 +236,37 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     balance2 = -1.0;
                 }
                 
-                //pass this info to the appropriate class
+                int level2;
+                try {
+                    level2 = Integer.parseInt(level);
+                } catch (Exception ex) {
+                    level2 = -1;
+                }
                 
+                int correct2;
+                try {
+                    correct2 = Integer.parseInt(correct);
+                } catch (Exception ex) {
+                    correct2 = -1;
+                }
+                
+                int guesses2;
+                try {
+                    guesses2 = Integer.parseInt(guesses);
+                } catch (Exception ex) {
+                    guesses2 = -1;
+                }
+                
+                //pass this info to the appropriate class
+                g.setMoney(balance2);
+                g.setLevel(level2);
+                g.setCorrect(correct2);
+                g.setGuesses(guesses2);
                     
-                //?connecct to appropriate screen
-                    
+                //connecct to appropriate screen
+                new NewJFrame().setVisible(true);
+                this.setVisible(false);
+                
             }
         }
         //else, (username not found) display an error

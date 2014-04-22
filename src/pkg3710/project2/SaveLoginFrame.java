@@ -166,11 +166,10 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         
         //get player's game info & set to variables
         Game g = new Game();
-        String balance = String.valueOf(g.getPlayer().getBalance());
-        int level = g.getLevel();
-        int correct = g.getCorrect();
-        int guesses = g.getGuesses();
-        //double winpercent = g.calculateWinPercentage();
+        String balance = String.valueOf(g.getMoney());
+        String level = String.valueOf(g.getLevel());
+        String correct = String.valueOf(g.getCorrect());
+        String guesses = String.valueOf(g.getGuesses());
         
         //see if username exists
         File file = new File("users.txt");
@@ -244,8 +243,9 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                     
                 }
                 
-                //?connecct to appropriate screen
-                    // close the game???
+                //Close the game/program
+                this.setVisible(false);
+        
             }
         }
         //else, (username not found) display an error
@@ -266,12 +266,6 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
 
-        /*
-        //click create new user button, go to CreateNewUser.java page
-        SaveLoginFrame.java = CreateNewUser.java;
-        CreateNewUser.java.setVisible(true);
-        SaveLoginFrame.this.setVisible(false);
-        */
     }                                             
 
     /**
