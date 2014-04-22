@@ -80,6 +80,10 @@ public class Game {
         money=cash;
     }
     
+    public Cup[] getCups(){
+        return cups;
+    }
+    
     //calculate the win percentage
     public double calculateWinPercentage(){
         if(guesses != 0)

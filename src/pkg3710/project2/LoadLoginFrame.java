@@ -253,7 +253,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 g.setLevel(level2);
                 g.setCorrect(correct2);
                 g.setGuesses(guesses2);
-                    
+                                    
                 //connecct to appropriate screen
                 new NewJFrame().setVisible(true);
                 this.setVisible(false);

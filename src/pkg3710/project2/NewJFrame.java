@@ -5,10 +5,10 @@
 package pkg3710.project2;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JLabel;
 
 /**
@@ -22,7 +22,7 @@ public class NewJFrame extends javax.swing.JFrame {
     int cupWithBall = -1;
     double bet = 0;
     int cupPlaces[] = {1, 2, 3};
-    //Point p[] = new Point[3];
+    Point p[] = new Point[3];
     //Point ballLocation;
 
     final int yAxisCups = 43;
@@ -48,9 +48,9 @@ public class NewJFrame extends javax.swing.JFrame {
         cups[1] = Cup2;
         cups[2] = Cup3;
         //Ball1.setVisible(false);
-        // p[0] = Cup1.getLocation();
-        // p[1] = Cup2.getLocation();
-        // p[2] = Cup3.getLocation();
+         p[0] = Cup1.getLocation();
+         p[1] = Cup2.getLocation();
+         p[2] = Cup3.getLocation();
         // ballLocation = Ball1.getLocation();
 
         updateWindow();
@@ -867,8 +867,16 @@ public class NewJFrame extends javax.swing.JFrame {
         }, displayBallTime, liftBallTime);
     }
 
-    public void LoadGame(Game game){
+    public void LoadGame(Game g){
+        game = g;
+        //updateWindow();
+        Cup Cups[] = game.getCups();
         
+        for(int i = 0;i<cups.length;i++){
+            int numCup = Cups[i].getNumber();
+            cups[i].setLocation(p[numCup-1]);
+        }
+        updateWindow();
     }
     
     /**
