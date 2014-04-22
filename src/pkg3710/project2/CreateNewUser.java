@@ -21,14 +21,18 @@ import java.util.Scanner;
  * @author greyson233
  */
 public class CreateNewUser extends javax.swing.JFrame {
-
+    Game g;
     /**
      * Creates new form createNewUser
      */
     public CreateNewUser() {
+        g = new Game();
         initComponents();
     }
-
+    
+    public CreateNewUser(Game game){
+        g = game;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,18 +147,31 @@ public class CreateNewUser extends javax.swing.JFrame {
         char[] pass = txtPassword.getPassword();
         char[] pass2 = txtPassword2.getPassword();
 
+        String balance = String.valueOf(g.getMoney());
+        String level = String.valueOf(g.getLevel());
+        String correct = String.valueOf(g.getCorrect());
+        String guesses = String.valueOf(g.getGuesses());
+        
         //add player's info to a text file
         if (Arrays.equals(pass, pass2)) {
             try {
                     //write username & password to the file
                 /*BufferedWriter*/ bw = new BufferedWriter(new FileWriter(username + ".txt", true));
                 bw.write(username);
-                bw.newLine();
+                    bw.newLine();
                 bw.write(pass);
-                bw.newLine();
+                    bw.newLine();
+                bw.write(balance);
+                    bw.newLine();
+                bw.write(level);
+                    bw.newLine();
+                bw.write(correct);
+                    bw.newLine();
+                bw.write(guesses);
+                    bw.newLine();
                 bw.close();
                 
-                    //write the username to the "users.txt" file
+                //write the username to the "users.txt" file
                 bw = new BufferedWriter(new FileWriter("users.txt", true));
                 bw.write(username);
                 bw.newLine();
@@ -166,6 +183,7 @@ public class CreateNewUser extends javax.swing.JFrame {
 
             this.setVisible(false);
             this.dispose();
+            
         } else {
             JOptionPane.showMessageDialog(ErrorFrame, "ERROR! Your passwords do not match, please try again", "Error", JOptionPane.ERROR_MESSAGE);
             //System.out.println("ERROR! Your passwords do not match, please try again.");

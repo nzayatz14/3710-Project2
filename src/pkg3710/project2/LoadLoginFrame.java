@@ -22,16 +22,17 @@ import javax.swing.JOptionPane;
  * @author greyson233
  */
 public class LoadLoginFrame extends javax.swing.JFrame {
-    Game game;
+    Game g;
     /**
      * Creates new form LoginFrame
      */
     public LoadLoginFrame() {
+        g = new Game();
         initComponents();
     }
 
-    public LoadLoginFrame(Game g){
-        game = g;
+    public LoadLoginFrame(Game game){
+        g = game;
         initComponents();
     }
     /**
@@ -149,7 +150,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         String filePassword = "";
                 
         //intialize variables
-        Game g = new Game();
+        //Game g = new Game();
         String balance = "";
         String level = "";
         String correct = "";
@@ -200,10 +201,9 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 txtPassword.requestFocus();
             }
             else if (password.equals(filePassword)){
-                try {
-                    //ask if user wants to continue from this last state or start a new game
                     JOptionPane.showMessageDialog(null, "Passwords match!");
                     
+                try {
                     br = new BufferedReader(new FileReader(fileName));
                     fileUsername = br.readLine();
                     filePassword = br.readLine();
@@ -225,6 +225,8 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     */
                     
                 } catch (FileNotFoundException ex) {
+                    Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } 
                 

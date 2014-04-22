@@ -23,16 +23,17 @@ import javax.swing.JOptionPane;
  * @author greyson233
  */
 public class SaveLoginFrame extends javax.swing.JFrame {
-    Game game;
+    Game g;
     /**
      * Creates new form LoginFrame
      */
     public SaveLoginFrame() {
+        g = new Game();
         initComponents();
     }
     
-    public SaveLoginFrame(Game g){
-        game = g;
+    public SaveLoginFrame(Game game){
+        g = game;
         initComponents();
     }
 
@@ -165,7 +166,6 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         String filePassword = "";
         
         //get player's game info & set to variables
-        Game g = new Game();
         String balance = String.valueOf(g.getMoney());
         String level = String.valueOf(g.getLevel());
         String correct = String.valueOf(g.getCorrect());
@@ -243,7 +243,7 @@ public class SaveLoginFrame extends javax.swing.JFrame {
                     
                 }
                 
-                //Close the game/program
+                //Close the save window
                 this.setVisible(false);
         
             }
