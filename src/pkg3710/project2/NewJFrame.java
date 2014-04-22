@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 public class NewJFrame extends javax.swing.JFrame {
 
     JLabel cups[] = new JLabel[3];
-    Game game = new Game();
+    Game game;
     int cupWithBall = -1;
     double bet = 0;
     int cupPlaces[] = {1, 2, 3};
@@ -38,8 +38,8 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public NewJFrame() {
-
         initComponents();
+        game = new Game();
         this.getContentPane().setBackground(Color.white);
         btnCup1.setEnabled(false);
         btnCup2.setEnabled(false);
@@ -54,6 +54,25 @@ public class NewJFrame extends javax.swing.JFrame {
         // ballLocation = Ball1.getLocation();
 
         updateWindow();
+    }
+    
+    public NewJFrame(Game g) {
+        initComponents();
+        game = g;
+        this.getContentPane().setBackground(Color.white);
+        btnCup1.setEnabled(false);
+        btnCup2.setEnabled(false);
+        btnCup3.setEnabled(false);
+        cups[0] = Cup1;
+        cups[1] = Cup2;
+        cups[2] = Cup3;
+        //Ball1.setVisible(false);
+         p[0] = Cup1.getLocation();
+         p[1] = Cup2.getLocation();
+         p[2] = Cup3.getLocation();
+        // ballLocation = Ball1.getLocation();
+
+        LoadGame();
     }
 
     /**
@@ -367,7 +386,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     //if the menu button "Load" is hit, create a new LoadLoginFrame
     private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {
-        new LoadLoginFrame(game).setVisible(true);
+        new LoadLoginFrame().setVisible(true);
+        this.setVisible(false);
+        this.dispose();
     }
 
     //if the menu button "Save" is hit, create a new SaveLoginFrame
@@ -867,9 +888,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }, displayBallTime, liftBallTime);
     }
 
-    public void LoadGame(Game g){
-        game = g;
-        //updateWindow();
+    public void LoadGame(){
         Cup Cups[] = game.getCups();
         
         for(int i = 0;i<cups.length;i++){

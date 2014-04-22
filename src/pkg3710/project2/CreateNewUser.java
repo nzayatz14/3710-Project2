@@ -51,7 +51,7 @@ public class CreateNewUser extends javax.swing.JFrame {
         labelPassword1 = new javax.swing.JLabel();
         txtPassword2 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtPassword.setText("jPasswordField1");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {

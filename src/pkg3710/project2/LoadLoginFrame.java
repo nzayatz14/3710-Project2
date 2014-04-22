@@ -16,6 +16,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.awt.event.*;
 
 /**
  *
@@ -62,7 +63,8 @@ public class LoadLoginFrame extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowEventHandler());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,8 +257,9 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 g.setGuesses(guesses2);
                                     
                 //connecct to appropriate screen
-                new NewJFrame().setVisible(true);
+                new NewJFrame(g).setVisible(true);
                 this.setVisible(false);
+                this.dispose();
                 
             }
         }
@@ -269,6 +272,13 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 txtUsername.requestFocus();
         }
     }                                           
+
+    class WindowEventHandler extends WindowAdapter {
+        public void windowClosing(WindowEvent evt) {
+            new NewJFrame().setVisible(true);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
