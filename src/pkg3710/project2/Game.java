@@ -84,12 +84,27 @@ public class Game {
         return cups;
     }
     
+    public int getPlaceOfBall(){
+    	for(int i =0;i<cups.length;i++){
+    		if(cups[i].containsBall())
+    			return i;
+    	}
+    	
+    	return -1;
+    }
+    
     //calculate the win percentage
     public double calculateWinPercentage(){
         if(guesses != 0)
         	return (correct/(double)(guesses)) *100;
         else
         	return 0;
+    }
+    
+    public void setCups(Cup[] c){
+    	for(int i = 0;i<c.length;i++){
+    		cups[i] = c[i];
+    	}
     }
     
     //In: the position of which the ball will be hiding under
