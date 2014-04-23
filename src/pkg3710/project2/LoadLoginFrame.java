@@ -38,8 +38,8 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    public LoadLoginFrame(Game game, JFrame j){
-        g = game;
+    public LoadLoginFrame(JFrame j){
+        g = new Game();
         frame = j;
         initComponents();
     }
