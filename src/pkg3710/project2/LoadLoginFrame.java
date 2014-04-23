@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 import java.awt.event.*;
 
 /**
@@ -24,16 +27,20 @@ import java.awt.event.*;
  */
 public class LoadLoginFrame extends javax.swing.JFrame {
     Game g;
+    JFrame frame;
     /**
      * Creates new form LoginFrame
      */
     public LoadLoginFrame() {
         g = new Game();
+        frame = new JFrame();
+        frame.setVisible(false);
         initComponents();
     }
 
-    public LoadLoginFrame(Game game){
+    public LoadLoginFrame(Game game, JFrame j){
         g = game;
+        frame = j;
         initComponents();
     }
     /**
@@ -257,6 +264,8 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 g.setGuesses(guesses2);
                                     
                 //connecct to appropriate screen
+                frame.setVisible(false);
+                frame.dispose();
                 new NewJFrame(g).setVisible(true);
                 this.setVisible(false);
                 this.dispose();
@@ -275,7 +284,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
 
     class WindowEventHandler extends WindowAdapter {
         public void windowClosing(WindowEvent evt) {
-            new NewJFrame().setVisible(true);
+            //new NewJFrame().setVisible(true);
         }
 
     }
