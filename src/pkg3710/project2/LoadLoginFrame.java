@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pkg3710.project2;
 
 import java.awt.Component;
@@ -15,10 +14,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import java.awt.event.*;
 
 /**
@@ -28,6 +25,7 @@ import java.awt.event.*;
 public class LoadLoginFrame extends javax.swing.JFrame {
     Game g;
     JFrame frame;
+    LoginSupport ls;
     /**
      * Creates new form LoginFrame
      */
@@ -35,12 +33,14 @@ public class LoadLoginFrame extends javax.swing.JFrame {
         g = new Game();
         frame = new JFrame();
         frame.setVisible(false);
+        ls = new LoginSupport();
         initComponents();
     }
 
     public LoadLoginFrame(JFrame j){
         g = new Game();
         frame = j;
+        ls = new LoginSupport();
         initComponents();
     }
     /**
@@ -143,75 +143,56 @@ public class LoadLoginFrame extends javax.swing.JFrame {
     }                                           
 
     /*
-    This fuction will read in a username and passowrd, verify both, and load a game to a previously played state. User will enter thier username and password. The funciton will read in both and verify that the username is valid by chekcing with a list of all usernames taht havce been created. If not valid, an error will be displayed. If valid, the funciton will open their file "username".txt and verify that the password is correct. If not correct, an error will be displayed and the apssword field will be cleared for them ot reenter in taht password. If correct, the function will search their file and load their previosuly saved info (accoutn balance, correct guesses, total guesses, last level palyed). This info will be passed to NewJFrame to contineu the game. 
+    This fuction will read in a username and passowrd, verify both, and load a 
+    game to a previously played state. User will enter thier username and 
+    password. The funciton will read in both and verify that the username is 
+    valid by chekcing with a list of all usernames taht havce been created. If 
+    not valid, an error will be displayed. If valid, the funciton will open 
+    their file "username".txt and verify that the password is correct. If not 
+    correct, an error will be displayed and the apssword field will be cleared 
+    for them ot reenter in taht password. If correct, the function will search 
+    their file and load their previosuly saved info (accoutn balance, correct 
+    guesses, total guesses, last level palyed). This info will be passed to 
+    NewJFrame to contineu the game. 
     */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // read in username and password 
+        //intialize variables 
         String username = txtUsername.getText();
         char[] pass = txtPassword.getPassword();
+        String password = String.valueOf(pass);
+        
         Component ErrorFrame = null;
         Boolean userExists = false;
         BufferedReader br = null;
 
-        //intialize variables 
         String fileName = username + ".txt";
         String fileUsername = "";
         String filePassword = "";
                 
-        //intialize variables
-        //Game g = new Game();
         String balance = "";
         String level = "";
         String correct = "";
         String guesses = "";
-                
-        //see if username exists
-        File file = new File("users.txt");
-            //try catch in case the file does not exist
-        Scanner in = null;
-            try {
-                in = new Scanner(file);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
         
-        //read the file, if the username is in the file, continue    
-        while (userExists==false && in.hasNextLine())
-        {
-          String line = in.nextLine();
-          if(line.equals(username)){
-              userExists=true;
-          }
-        }
+        //check if username exists, call support function
+        userExists = ls.userExists(username);
         
         //if found, do the following
         if (userExists==true){
-            //get password stored in the player's file
-            //try, catch; save the file details
-            try{
-            br = new BufferedReader(new FileReader(fileName));
-            fileUsername = br.readLine();
-            filePassword = br.readLine();
-            br.close();
-            }catch(Exception ex){
-                //System.out.println( "Text File Written To file" );
-            }
-
-            //JOptionPane.showMessageDialog(ErrorFrame, filePassword, "Error", JOptionPane.ERROR_MESSAGE);
-            String password = String.valueOf(pass);
-
+            //get the password from the user's file
+            filePassword = ls.getPassword(username);
+            
             if(!password.equals(filePassword)){
-                //txtPassword.setText("Correct login!");
                 JOptionPane.showMessageDialog(ErrorFrame, "ERROR! Your passwords do not match, please try again", "Error", JOptionPane.ERROR_MESSAGE);
-                //System.out.println("ERROR! Password is not correct. Please try again.");
 
                 //clear the text box
                 txtPassword.setText("");
                 txtPassword.requestFocus();
             }
             else if (password.equals(filePassword)){
-                    JOptionPane.showMessageDialog(null, "Passwords match!");
-                    
+                //JOptionPane.showMessageDialog(null, "Passwords match!");
+                
+                //read info from file and save to variables     
                 try {
                     br = new BufferedReader(new FileReader(fileName));
                     fileUsername = br.readLine();
@@ -228,7 +209,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } 
                 
-                //convert balance from a string to a double
+                //convert balance from a string to a double by parsing it
                 double balance2;
                 try {
                     balance2 = Double.parseDouble(balance);
@@ -236,6 +217,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     balance2 = -1.0;
                 }
                 
+                //convert level from a string to an integer by parsing it
                 int level2;
                 try {
                     level2 = Integer.parseInt(level);
@@ -243,6 +225,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     level2 = -1;
                 }
                 
+                //convert correct guesses from a string to an integer by parsing it
                 int correct2;
                 try {
                     correct2 = Integer.parseInt(correct);
@@ -250,6 +233,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                     correct2 = -1;
                 }
                 
+                //convert total guesses from a string to an integer by parsing it
                 int guesses2;
                 try {
                     guesses2 = Integer.parseInt(guesses);
@@ -263,22 +247,22 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 g.setCorrect(correct2);
                 g.setGuesses(guesses2);
                                     
-                //connecct to appropriate screen
+                //connect to appropriate screen
                 frame.setVisible(false);
                 frame.dispose();
                 new NewJFrame(g).setVisible(true);
                 this.setVisible(false);
                 this.dispose();
-                
             }
         }
         //else, (username not found) display an error
         else{
-                JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                //clear the text box
-                txtPassword.setText("");
-                txtUsername.setText("");
-                txtUsername.requestFocus();
+            JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            //clear the text box
+            txtPassword.setText("");
+            txtUsername.setText("");
+            txtUsername.requestFocus();
         }
     }                                           
 

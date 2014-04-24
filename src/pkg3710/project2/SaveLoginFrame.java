@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pkg3710.project2;
 
 import java.awt.Component;
@@ -24,16 +23,19 @@ import javax.swing.JOptionPane;
  */
 public class SaveLoginFrame extends javax.swing.JFrame {
     Game g;
+    LoginSupport ls;
     /**
      * Creates new form LoginFrame
      */
     public SaveLoginFrame() {
         g = new Game();
+        ls = new LoginSupport();
         initComponents();
     }
     
     public SaveLoginFrame(Game game){
         g = game;
+        ls = new LoginSupport();
         initComponents();
     }
 
@@ -150,17 +152,29 @@ public class SaveLoginFrame extends javax.swing.JFrame {
     }                                           
 
     /*
-    This fuction will read in a username and passowrd, verify both, and save a game to a user's file if it exists. User will enter thier username and password. The funciton will read in both and verify that the username is valid by chekcing with a list of all usernames taht havce been created. If username is not valid, an error will be displayed. If valid, the funciton will open their file "username".txt and verify that the password is correct. If not correct, an error will be displayed and the apssword field will be cleared for them ot reenter in taht password. If correct, the function will save their game info to thier accoutn (accoutn balance, correct guesses, total guesses, last level palyed). If the user click's "create new username" they will be directed to hte CreateNewUserFrame to create a new usernaem and password. 
+    This fuction will read in a username and passowrd, verify both, and save a 
+    game to a user's file if it exists. User will enter their username and 
+    password. The funciton will read in both and verify that the username is 
+    valid by chekcing with a list of all usernames taht havce been created. If 
+    username is not valid, an error will be displayed. If valid, the funciton 
+    will open their file "username".txt and verify that the password is correct. 
+    If not correct, an error will be displayed and the apssword field will be 
+    cleared for them ot reenter in taht password. If correct, the function will 
+    save their game info to thier accoutn (accoutn balance, correct guesses, 
+    total guesses, last level palyed). If the user click's "create new username" 
+    they will be directed to hte CreateNewUserFrame to create a new usernaem and 
+    password. 
     */
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here: 
+        //initialize variables
         String username = txtUsername.getText();
         char[] pass = txtPassword.getPassword();
+        String password = String.valueOf(pass);
+
         Component ErrorFrame = null;
         Boolean userExists = false;
         BufferedWriter bw = null;
 
-        //intialize variables
         String fileName = username + ".txt";
         String fileUsername = "";
         String filePassword = "";
@@ -171,102 +185,50 @@ public class SaveLoginFrame extends javax.swing.JFrame {
         String correct = String.valueOf(g.getCorrect());
         String guesses = String.valueOf(g.getGuesses());
         
-        //see if username exists
-        File file = new File("users.txt");
-            //try catch in case the file does not exist
-        Scanner in = null;
-            try {
-                in = new Scanner(file);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(LoadLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        //read the file, if the username is in the file, continue    
-        while (userExists==false && in.hasNextLine())
-        {
-          String line = in.nextLine();
-          if(line.equals(username)){
-              userExists=true;
-          }
-        }
+        //see if username exists, call support function
+        userExists = ls.userExists(username);
         
         //if found, do the following
         if (userExists==true){
-            //get password stored in the player's file
-            //try, catch; save the file details
-            try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            fileUsername = br.readLine();
-            filePassword = br.readLine();
-            br.close();
-            }catch(Exception ex){
-                //System.out.println( "Text File Written To file" );
-            }
-
-            //JOptionPane.showMessageDialog(ErrorFrame, filePassword, "Error", JOptionPane.ERROR_MESSAGE);
-            String password = String.valueOf(pass);
+            //get the password from the user's file
+            filePassword = ls.getPassword(username);
 
             if(!password.equals(filePassword)){
-                //txtPassword.setText("Correct login!");
                 JOptionPane.showMessageDialog(ErrorFrame, "ERROR! Your passwords do not match, please try again", "Error", JOptionPane.ERROR_MESSAGE);
-                //System.out.println("ERROR! Password is not correct. Please try again.");
 
                 //clear the text box
                 txtPassword.setText("");
                 txtPassword.requestFocus();
             }
             else if (password.equals(filePassword)){
-                //ask if user wants to continue from this last state or start a new game
-                JOptionPane.showMessageDialog(null, "Passwords match!");
+                //JOptionPane.showMessageDialog(null, "Passwords match!");
+                
+                //call support function to write data to file
+                ls.writeToFile(fileName, fileUsername, filePassword, balance, level, correct, guesses);
 
-                //save session data (amount of money in account, score, level)
-                try{
-                    //this will overwrite whatever is the file so the new game info will be saved over the old game info
-                    bw = new BufferedWriter(new FileWriter(fileName));
-                        //save username & password
-                    bw.write(fileUsername);
-                        bw.newLine();
-                    bw.write(filePassword);
-                        bw.newLine();
-                
-                        //save the game's info
-                    bw.write(balance);
-                        bw.newLine();
-                    bw.write(level);
-                        bw.newLine();
-                    bw.write(correct);
-                        bw.newLine();
-                    bw.write(guesses);
-                        bw.newLine();
-                    bw.close();
-                } catch (Exception ex){
-                    
-                }
-                
                 //Close the "save game" window
                 this.setVisible(false);
                 this.dispose();
-        
             }
         }
         //else, (username not found / doesn't exist) display an error
         else{
-                JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again or create a new username/account.", "Error", JOptionPane.ERROR_MESSAGE);
-                //clear the text box
-                txtPassword.setText("");
-                txtUsername.setText("");
-                txtUsername.requestFocus();
-        }
-    }                                           
+            JOptionPane.showMessageDialog(ErrorFrame, "ERROR! The username you entered does not exist. Please try again or create a new username/account.", "Error", JOptionPane.ERROR_MESSAGE);
 
+            //clear the text box
+            txtPassword.setText("");
+            txtUsername.setText("");
+            txtUsername.requestFocus();
+        }
+    }                    
+    
+    //if player clicks "Create new user" button
     private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         new CreateNewUser(g).setVisible(true);
 
         //click create new user button, go to new page
-        //new CreateNewUser().setVisible(true);
         this.setVisible(false);
         this.dispose();
-
     }                                             
 
     /**

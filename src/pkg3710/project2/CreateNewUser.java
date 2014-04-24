@@ -16,22 +16,26 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.util.Scanner;
+
 /**
  *
  * @author greyson233
  */
 public class CreateNewUser extends javax.swing.JFrame {
     Game g;
+    LoginSupport ls;
     /**
      * Creates new form createNewUser
      */
     public CreateNewUser() {
         g = new Game();
+        ls = new LoginSupport();
         initComponents();
     }
     
     public CreateNewUser(Game game){
         g = game;
+        ls = new LoginSupport();
         initComponents();
     }
     /**
@@ -137,17 +141,27 @@ public class CreateNewUser extends javax.swing.JFrame {
     }                                           
 
     /*
-    Once the submit button is clicked, this function will read in the username and two passwords. It will first verify that the two passwords match and if match this fucntion will write the username and password to a file titled "username".txt that will be stored for later use. If the passowrds don't match, an error will be displayed, the password fields will be cleared, and the user can reenter in thier passwords. 
+    Once the submit button is clicked, this function will read in the username 
+    and two passwords. It will first verify that the two passwords match and if 
+    match this fucntion will write the username and password to a file titled 
+    "username".txt that will be stored for later use. If the passowrds don't 
+    match, an error will be displayed, the password fields will be cleared, and 
+    the user can reenter in thier passwords. 
     */
-    private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {   
+        //initialize & set variables
         BufferedWriter bw = null;
         Component ErrorFrame = null;
-        //Scanner reader = new Scanner(new File("users.txt"));
 
         String username = txtUsername.getText();
         char[] pass = txtPassword.getPassword();
+        String password = String.valueOf(pass);
+        
         char[] pass2 = txtPassword2.getPassword();
-
+        String password2 = String.valueOf(pass2);
+        
+        String fileName = username + ".txt";
+        
         String balance = String.valueOf(g.getMoney());
         String level = String.valueOf(g.getLevel());
         String correct = String.valueOf(g.getCorrect());
@@ -155,24 +169,11 @@ public class CreateNewUser extends javax.swing.JFrame {
         
         //add player's info to a text file
         if (Arrays.equals(pass, pass2)) {
+            //call support function to write data to file
+            ls.writeToFile(fileName, username, password, balance, level, correct, guesses);
+
+            //write the username to the "users.txt" file
             try {
-                //write username & password to the file & saved game data
-                /*BufferedWriter*/ bw = new BufferedWriter(new FileWriter(username + ".txt", true));
-                bw.write(username);
-                    bw.newLine();
-                bw.write(pass);
-                    bw.newLine();
-                bw.write(balance);
-                    bw.newLine();
-                bw.write(level);
-                    bw.newLine();
-                bw.write(correct);
-                    bw.newLine();
-                bw.write(guesses);
-                    bw.newLine();
-                bw.close();
-                
-                //write the username to the "users.txt" file
                 bw = new BufferedWriter(new FileWriter("users.txt", true));
                 bw.write(username);
                 bw.newLine();
@@ -182,47 +183,22 @@ public class CreateNewUser extends javax.swing.JFrame {
                 //System.out.println( "Text File Written To file" );
             }
 
+            //connect screens
             this.setVisible(false);
             this.dispose();
             
         } else {
             JOptionPane.showMessageDialog(ErrorFrame, "ERROR! Your passwords do not match, please try again", "Error", JOptionPane.ERROR_MESSAGE);
-            //System.out.println("ERROR! Your passwords do not match, please try again.");
             
             //clear the text boxes
             txtPassword.setText("");
             txtPassword2.setText("");
             txtPassword.requestFocus();
         }
-        //go to the game screen 
-        /*
-        char[] pass2 = txtPassword2.getPassword();
-        //if the passwords don't match
-        while (pass != pass2) {
-            //display error & try again
-            System.out.println("ERROR! Your passwords do not match, please try again.");
-            //clear the text boxes
-            txtPassword.setText("");
-            txtPassword2.setText("");
-        }   
-            
-        try {    
-            bw = new BufferedWriter(new FileWriter(username+".txt", true));
-            bw.write(username);
-            bw.write("\n");
-            bw.write(pass);
-            bw.write("\n");
-            bw.close();
-        }catch(Exception ex){
-            System.out.println( "Text File Written To file" );
-        }
-        
-            //go to the game screen 
-        */
     }                                           
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        // take no action here
     }                                           
 
     private void txtPassword2ActionPerformed(java.awt.event.ActionEvent evt) {                                             
