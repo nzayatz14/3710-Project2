@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg3710.project2;
+//package pkg3710.project2;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -28,13 +28,15 @@ public class NewJFrame extends javax.swing.JFrame {
 	Point p[] = new Point[3];
 	//Point ballLocation;
 
+	final int pixelsPerLevel[] = {1,11,6,13,7,3,8,17,9,19,2,21,11,23,12,5,13,27,14,29,3};
+	final int cupPixelLevels[] = {1,10,5,10,5,2,5,10,5,10,1,10,5,10,5,2,5,10,5,10,1};
 	final int yAxisCups = 43;
 	final int liftCupInterval = 25;
 	final int liftCupWait = 1000;
 	final int displayBallTime = 3000;
 	final int liftBallTime = 10;
-	final int cupPixelTime = 1;
-	private int pixelsPerMove = 1;
+	private int cupPixelTime = 1;
+	private int pixelsPerMove = 3;
 	private int pause = 0;
 
 	//private JFrameSupport support = new JFrameSupport();
@@ -340,6 +342,17 @@ public class NewJFrame extends javax.swing.JFrame {
 			bet = wager;
 			jButton1.setEnabled(false);
 			txtAmount.setEnabled(false);
+			
+			int lvl = game.getLevel()-1;
+			
+			if(lvl<20){
+				pixelsPerMove = pixelsPerLevel[lvl];
+				cupPixelTime = cupPixelLevels[lvl];
+			}else{
+				pixelsPerMove = pixelsPerLevel[pixelsPerLevel.length-1];
+				cupPixelTime = cupPixelLevels[cupPixelLevels.length-1];
+			}
+			
 			placeAndMoveBallUp();
 			/*Random r = new Random();
              //placeAndMoveBallUp();
@@ -889,9 +902,15 @@ public class NewJFrame extends javax.swing.JFrame {
 						Ball1.setLocation(cups[cupNumber2].getLocation());
 					}
 				} else {
-					cups[cupNumber1].setLocation(cups[cupNumber1].getX(), yAxisCups);
-					cups[cupNumber2].setLocation(cups[cupNumber2].getX(), yAxisCups);
-					Ball1.setLocation(Ball1.getX(), yAxisCups);
+					cups[cupNumber1].setLocation(p[from-1]);
+					cups[cupNumber2].setLocation(p[to-1]);
+					
+					if (cupNumber1 == cupWithBall) {
+						Ball1.setLocation(cups[cupNumber1].getLocation());
+					} else if (cupNumber2 == cupWithBall) {
+						Ball1.setLocation(cups[cupNumber2].getLocation());
+					}
+					
 					//updateWindow();
 					swapGraphics(swa, d + 1);
 					this.cancel();
