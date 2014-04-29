@@ -28,7 +28,7 @@ public class Game {
         guesses = 0;
         level = 1;
         money = 1000;
-        p = new Player(level,money);
+        p = new Player(level,money); //creates an instance of the player class
     }
     
     public Game(int right,int total, int diff, double cash)

@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 //import pkg3710.project2.Game;
 //import pkg3710.project2.LoadLoginFrame;
 //import pkg3710.project2.SaveLoginFrame;
@@ -452,6 +453,11 @@ public class NewJFrame extends javax.swing.JFrame {
 	//resets the window after the round by placing the cups in correct their spaces and clearing txtAmount
 	//updates the users money, level, and win percentage after each round
 	private void updateWindow() {
+                //if the user has no money close the game.
+                if(game.getMoney()==0){
+                    JOptionPane.showMessageDialog(null, "GAME OVER");
+                    System.exit(0);
+                }    
 		//update data on screen
 		levelField.setText(game.getLevel() + "");
 		balanceTxtField.setText(game.getMoney() + "");
