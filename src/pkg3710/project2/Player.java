@@ -55,14 +55,16 @@ public class Player {
     in the event that the user  loses a round in the game.
     */
     public double withdraw(double wager1) {
-        return balance - wager1;   
+        balance = balance - wager1;
+        return balance;   
     }
     /*
     Deposit - this is the framework for the functionality to deposit money into the users "bank" account in the event 
     that the user wins a round. 
     */
     public double deposit(double win1){
-        return balance += win1;
+        balance = balance + win1;
+        return balance;
     }
 
     public int getLevel()

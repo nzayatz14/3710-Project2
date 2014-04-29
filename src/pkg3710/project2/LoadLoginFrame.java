@@ -30,7 +30,6 @@ public class LoadLoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     public LoadLoginFrame() {
-        g = new Game();
         frame = new JFrame();
         frame.setVisible(false);
         ls = new LoginSupport();
@@ -38,7 +37,6 @@ public class LoadLoginFrame extends javax.swing.JFrame {
     }
 
     public LoadLoginFrame(JFrame j){
-        g = new Game();
         frame = j;
         ls = new LoginSupport();
         initComponents();
@@ -242,10 +240,7 @@ public class LoadLoginFrame extends javax.swing.JFrame {
                 }
                 
                 //pass this info to the appropriate class
-                g.setMoney(balance2);
-                g.setLevel(level2);
-                g.setCorrect(correct2);
-                g.setGuesses(guesses2);
+                g = new Game(correct2, guesses2, level2, balance2);
                                     
                 //connect to appropriate screen
                 frame.setVisible(false);
