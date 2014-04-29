@@ -2,16 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//package pkg3710.project2;
+package pkg3710.project2;
 
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
+//import pkg3710.project2.Game;
+//import pkg3710.project2.LoadLoginFrame;
+//import pkg3710.project2.SaveLoginFrame;
 
 /**
  *
