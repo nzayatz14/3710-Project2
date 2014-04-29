@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pkg3710.project2;
+//package pkg3710.project2;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -106,7 +106,7 @@ public class Player {
     {
         Component ErrorFrame = null;
         if(money > balance || money <= 0){
-          JOptionPane.showMessageDialog(ErrorFrame, "You do not have enough funds to place that bet.", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(ErrorFrame, "Invalid Bet. Try Again.", "Error", JOptionPane.ERROR_MESSAGE);
           return false;
         }else{
           PlaceBet(money);

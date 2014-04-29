@@ -1,4 +1,4 @@
-package pkg3710.project2;
+//package pkg3710.project2;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -148,8 +148,8 @@ public class Game {
             cups[a].setPosition(a);
             cups[b].setPosition(b);
             
-            //The swapCall creates a 4 digit integer “abcd” which basically says “Cup ‘a’ moves 
-            //to position ‘b’ and Cup ‘c’ moves to position ‘d’” to represent 1 move. All of these 
+            //The swapCall creates a 4 digit integer 'abcd' which basically says Cup 'a' moves 
+            //to position 'b' and Cup 'c' moves to position 'd' to represent 1 move. All of these 
             //combos are added to an array and sent to the newJFrame to make the swaps happen graphically
             int swapCall = (cups[a].getNumber()*1000)+(a*100)+(cups[b].getNumber()*10)+b;
             swap[i] = swapCall;
